@@ -18,17 +18,17 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CustomerID")
-    private long id;
+    @Column(name = "customerID")
+    private long customerID;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "PhoneNumber", nullable = false)
-    private int phoneNumber;
 
     @Column(name = "identityNumber", nullable = false)
     private int identityNumber;
+
+    @Column(name = "phoneNumber", nullable = false)
+    private int phoneNumber;
 
     @Column(name = "secondPhoneNumber", nullable = false)
     private int secondPhoneNumber;
@@ -59,7 +59,5 @@ public class Customer implements Serializable {
 
     @Column(name = "accountStatus", nullable = false)
     private String accountStatus;
-
-
 
 }

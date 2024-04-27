@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class CustomerDTO {
 
-    private long id;
+    private long customerID;
     private String name;
     private int identityNumber;
     private int phoneNumber;

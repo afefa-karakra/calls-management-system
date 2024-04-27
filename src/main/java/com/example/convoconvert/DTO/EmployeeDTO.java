@@ -13,7 +13,7 @@ import java.sql.Time;
 @AllArgsConstructor
 public class EmployeeDTO {
 
-    private long id;
+    private long employeeID;
     private String name;
     private int identityNumber;
     private int phoneNumber;

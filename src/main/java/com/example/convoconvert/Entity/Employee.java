@@ -19,15 +19,11 @@ public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "EmployeeID")
-    private long id;
+    @Column(name = "employeeID")
+    private long employeeID;
 
-    @Column(name = "Name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "PhoneNumber", nullable = false)
-    private int PhoneNumber;
-
 
     @Column(name = "identityNumber", nullable = false)
     private int identityNumber;

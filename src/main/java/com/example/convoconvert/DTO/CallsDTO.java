@@ -1,5 +1,7 @@
 package com.example.convoconvert.DTO;
 
+import java.sql.Blob;
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -13,9 +15,17 @@ import javax.management.ConstructorParameters;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CallsDTO {
-
-    private long id;
+    private int callID;
+    private byte[] audio;
     private String audioText;
+    private String textEntities;
+    private Time time;
     private Date date;
+    private boolean started;
+    private String status;
+    private String keywords;
+    private String nerTags;
+    private String entityClasses;
+    private boolean trash;
 
 }

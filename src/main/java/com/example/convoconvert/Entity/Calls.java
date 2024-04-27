@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.Date;
 
 @Data
@@ -28,7 +29,34 @@ public class Calls implements Serializable {
     @Column(name = "date", nullable = true)
     private Date date;
 
-    /*@OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "audio", nullable = true)
+    private byte[] audio;
+
+    @Column(name = "textEntities", nullable = true)
+    private String textEntities;
+
+    @Column(name = "time", nullable = true)
+    private Time time;
+
+    @Column(name = "started", nullable = true)
+    private boolean started;
+
+    @Column(name = "status", nullable = true)
+    private String status;
+
+    @Column(name = "keywords", nullable = true)
+    private String keywords;
+
+    @Column(name = "nerTags", nullable = true)
+    private String nerTags;
+
+    @Column(name = "entityClasses", nullable = true)
+    private String entityClasses;
+
+    @Column(name = "trash", nullable = true)
+    private boolean trash;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerIdFK", referencedColumnName = "id")
-    private Customer customer;*/
+    private Customer customer;
 }

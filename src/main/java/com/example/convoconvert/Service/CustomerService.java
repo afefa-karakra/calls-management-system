@@ -100,7 +100,7 @@ public class CustomerService implements CustomerServiceInterface {
 
     private CustomerDTO mapToDTO(Customer customer){
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setId(customer.getId());
+        customerDTO.setCustomerID(customer.getCustomerID());
         customerDTO.setName(customer.getName());
         customerDTO.setPhoneNumber(customer.getPhoneNumber());
 

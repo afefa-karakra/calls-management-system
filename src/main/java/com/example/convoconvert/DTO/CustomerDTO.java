@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerDTO {
 
-    private int customerID;
+    private long id;
     private String name;
     private int identityNumber;
     private int phoneNumber;

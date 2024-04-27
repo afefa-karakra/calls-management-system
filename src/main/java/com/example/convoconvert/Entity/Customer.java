@@ -24,40 +24,40 @@ public class Customer implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "identityNumber", nullable = false)
+    @Column(name = "identityNumber", nullable = true)
     private int identityNumber;
 
     @Column(name = "phoneNumber", nullable = false)
     private int phoneNumber;
 
-    @Column(name = "secondPhoneNumber", nullable = false)
+    @Column(name = "secondPhoneNumber", nullable = true)
     private int secondPhoneNumber;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = "address", nullable = true)
     private String address;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = true)
     private String email;
 
-    @Column(name = "dateOfBirth", nullable = false)
+    @Column(name = "dateOfBirth", nullable = true)
     private Date dateOfBirth;
 
-    @Column(name = "age", nullable = false)
+    @Column(name = "age", nullable = true)
     private int age;
 
-    @Column(name = "regestrationDate", nullable = false)
+    @Column(name = "regestrationDate", nullable = true)
     private Date regestrationDate;
 
-    @Column(name = "subscriptionPlan", nullable = false)
+    @Column(name = "subscriptionPlan", nullable = true)
     private String subscriptionPlan;
 
-    @Column(name = "customerType", nullable = false)
+    @Column(name = "customerType", nullable = true)
     private String customerType;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender", nullable = true)
     private String gender;
 
-    @Column(name = "accountStatus", nullable = false)
+    @Column(name = "accountStatus", nullable = true)
     private String accountStatus;
 
 }

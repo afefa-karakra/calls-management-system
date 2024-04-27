@@ -59,4 +59,8 @@ public class Calls implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerIdFK", referencedColumnName = "customerID")
     private Customer customer;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employeeIdFK", referencedColumnName = "employeeID")
+    private Employee employee;
 }

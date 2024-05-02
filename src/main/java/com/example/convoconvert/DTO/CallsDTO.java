@@ -16,7 +16,7 @@ import javax.management.ConstructorParameters;
 @AllArgsConstructor
 public class CallsDTO {
     private long callID;
-    private byte[] audio;
+    private String audio;
     private String audioText;
     private String textEntities;
     private Time time;

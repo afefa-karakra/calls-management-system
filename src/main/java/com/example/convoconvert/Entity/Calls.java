@@ -24,7 +24,7 @@ public class Calls implements Serializable {
     private long callsID;
 
     @Column(name = "audio", nullable = true)
-    private byte[] audio;
+    private String audio;
 
     @Column(name = "audioText", nullable = false)
     private String audioText;
@@ -60,7 +60,7 @@ public class Calls implements Serializable {
     @JoinColumn(name = "customerIdFK", referencedColumnName = "customerID")
     private Customer customer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+   /* @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employeeIdFK", referencedColumnName = "employeeID")
-    private Employee employee;
+    private Employee employee;*/
 }

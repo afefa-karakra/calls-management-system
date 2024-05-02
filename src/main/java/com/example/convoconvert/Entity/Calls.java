@@ -20,23 +20,23 @@ public class Calls implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "callsID")
-    private long callsID;
-
-    @Column(name = "audio", nullable = true)
-    private String audio;
+    @Column(name = "id")
+    private long id;
 
     @Column(name = "audioText", nullable = false)
     private String audioText;
+
+    @Column(name = "date", nullable = true)
+    private Date date;
+
+    @Column(name = "audio", nullable = true)
+    private byte[] audio;
 
     @Column(name = "textEntities", nullable = true)
     private String textEntities;
 
     @Column(name = "time", nullable = true)
     private Time time;
-
-    @Column(name = "date", nullable = true)
-    private Date date;
 
     @Column(name = "started", nullable = true)
     private boolean started;
@@ -57,10 +57,6 @@ public class Calls implements Serializable {
     private boolean trash;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customerIdFK", referencedColumnName = "customerID")
+    @JoinColumn(name = "customerIdFK", referencedColumnName = "id")
     private Customer customer;
-
-   /* @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeeIdFK", referencedColumnName = "employeeID")
-    private Employee employee;*/
 }

@@ -89,7 +89,7 @@ public class CallsService implements CallsServiceInterface {
 
     private CallsDTO mapToDTO(Calls calls) {
         CallsDTO callsDTO = new CallsDTO();
-        callsDTO.setCallID(calls.getCallsID());
+        callsDTO.setId(calls.getId());
         callsDTO.setAudioText(calls.getAudioText());
         callsDTO.setDate(calls.getDate());
 

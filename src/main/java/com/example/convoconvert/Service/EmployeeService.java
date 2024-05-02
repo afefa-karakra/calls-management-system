@@ -98,7 +98,7 @@ public class EmployeeService implements EmployeeServiceInterface {
 
     private EmployeeDTO mapToDTO(Employee employee){
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setEmployeeID(employee.getEmployeeID());
+        employeeDTO.setId(employee.getId());
         employeeDTO.setName(employee.getName());
         employeeDTO.setPhoneNumber(employee.getPhoneNumber());
 

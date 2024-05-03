@@ -73,4 +73,15 @@ public class CallsController {
     public ResponseEntity<List<CallsDTO>> getStartedCalls(){
         return ResponseEntity.ok().body(callsServiceInterface.getStartedCalls());
     }
+
+    @GetMapping("/solved")
+    public ResponseEntity<List<CallsDTO>> getSolveCalls(){
+        return ResponseEntity.ok().body(callsServiceInterface.getSolveCalls());
+    }
+
+    @GetMapping("/notsolved")
+    public ResponseEntity<List<CallsDTO>> getNotSolveCalls(){
+        return ResponseEntity.ok().body(callsServiceInterface.getNotSolveCalls());
+    }
+
 }

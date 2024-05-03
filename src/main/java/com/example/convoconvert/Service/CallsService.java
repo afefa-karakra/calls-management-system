@@ -111,4 +111,18 @@ public class CallsService implements CallsServiceInterface {
         return startedCalls.stream().map(calls -> mapToDTO(calls))
                 .collect(Collectors.toList());
     }
+
+    public List<CallsDTO> getSolveCalls(){
+        List<Calls> solveCalls = callsInterfaceRepository.findAll();
+        solveCalls =solveCalls.stream().filter(call -> call.getStatus().equals("solve")).collect(Collectors.toList());
+        return solveCalls.stream().map(calls -> mapToDTO(calls))
+                .collect(Collectors.toList());
+    }
+
+    public List<CallsDTO> getNotSolveCalls(){
+        List<Calls> notSolveCalls = callsInterfaceRepository.findAll();
+        notSolveCalls =notSolveCalls.stream().filter(call -> call.getStatus().equals("notsolve")).collect(Collectors.toList());
+        return notSolveCalls.stream().map(calls -> mapToDTO(calls))
+                .collect(Collectors.toList());
+    }
 }

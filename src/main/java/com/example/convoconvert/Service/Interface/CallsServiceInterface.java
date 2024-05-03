@@ -17,5 +17,6 @@ public interface CallsServiceInterface {
     List<CallsDTO> getAllCalls();
     void deleteCallById (long id);
     List<CallsDTO> getStartedCalls();
-
+    List<CallsDTO> getSolveCalls();
+    List<CallsDTO> getNotSolveCalls();
 }

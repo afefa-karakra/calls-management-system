@@ -104,4 +104,11 @@ public class CallsService implements CallsServiceInterface {
         return calls;
 
     }
+
+    public List<CallsDTO> getStartedCalls(){
+        List<Calls> startedCalls = callsInterfaceRepository.findAll();
+        startedCalls =startedCalls.stream().filter(call -> call.isStarted()).collect(Collectors.toList());
+        return startedCalls.stream().map(calls -> mapToDTO(calls))
+                .collect(Collectors.toList());
+    }
 }

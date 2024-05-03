@@ -38,7 +38,7 @@ public class Calls implements Serializable {
     @Column(name = "time", nullable = true)
     private Time time;
 
-    @Column(name = "started", nullable = true)
+    @Column(name = "started")
     private boolean started;
 
     @Column(name = "status", nullable = true)
@@ -59,4 +59,8 @@ public class Calls implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerIdFK", referencedColumnName = "id")
     private Customer customer;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employeeIdFK", referencedColumnName = "id")
+    private Employee employee;
 }

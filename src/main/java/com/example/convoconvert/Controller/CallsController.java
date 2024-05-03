@@ -68,4 +68,9 @@ public class CallsController {
         callsServiceInterface.deleteCallById(id);
         return new ResponseEntity<>("Deleted successfully!", HttpStatus.OK);
     }
+
+    @GetMapping("/started")
+    public ResponseEntity<List<CallsDTO>> getStartedCalls(){
+        return ResponseEntity.ok().body(callsServiceInterface.getStartedCalls());
+    }
 }

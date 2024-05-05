@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -82,6 +83,11 @@ public class CallsController {
     @GetMapping("/notsolved")
     public ResponseEntity<List<CallsDTO>> getNotSolveCalls(){
         return ResponseEntity.ok().body(callsServiceInterface.getNotSolveCalls());
+    }
+
+    @GetMapping("/fillter")
+    public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id , Date date){
+        return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, date));
     }
 
 }

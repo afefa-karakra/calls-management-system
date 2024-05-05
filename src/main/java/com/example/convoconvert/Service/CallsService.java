@@ -8,7 +8,8 @@ import com.example.convoconvert.Service.Interface.CallsServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -69,11 +70,8 @@ public class CallsService implements CallsServiceInterface {
                 String obj = hm.getValue().toString();
 
                 calls.setAudioText(obj);
-
             }
-
         }
-
         Calls updateCalls = callsInterfaceRepository.save(calls);
         return mapToDTO(updateCalls);
     }
@@ -84,24 +82,6 @@ public class CallsService implements CallsServiceInterface {
 
         Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
         callsInterfaceRepository.delete(calls);
-
-    }
-
-    private CallsDTO mapToDTO(Calls calls) {
-        CallsDTO callsDTO = new CallsDTO();
-        callsDTO.setId(calls.getId());
-        callsDTO.setAudioText(calls.getAudioText());
-        callsDTO.setDate(calls.getDate());
-
-        return callsDTO;
-    }
-
-    private Calls mapToEntity(CallsDTO callsDTO) {
-        Calls calls = new Calls();
-        calls.setAudioText(callsDTO.getAudioText());
-        calls.setDate(callsDTO.getDate());
-
-        return calls;
 
     }
 
@@ -122,4 +102,31 @@ public class CallsService implements CallsServiceInterface {
         return notSolveCalls.stream().map(calls -> mapToDTO(calls))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<CallsDTO> getListOfCallsFillter(long id, Date date) {
+        List<Calls> callsList = callsInterfaceRepository.getListOfCallsFillter(id , date);
+        return callsList.stream().map(calls -> mapToDTO(calls)).collect(Collectors.toList());
+
+    }
+
+
+    private CallsDTO mapToDTO(Calls calls) {
+        CallsDTO callsDTO = new CallsDTO();
+        callsDTO.setId(calls.getId());
+        callsDTO.setAudioText(calls.getAudioText());
+        callsDTO.setDate(calls.getDate());
+
+        return callsDTO;
+    }
+
+    private Calls mapToEntity(CallsDTO callsDTO) {
+        Calls calls = new Calls();
+        calls.setAudioText(callsDTO.getAudioText());
+        calls.setDate(callsDTO.getDate());
+
+        return calls;
+
+    }
+
 }

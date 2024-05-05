@@ -106,22 +106,19 @@ public class CallsService implements CallsServiceInterface {
     }
 
     public List<CallsDTO> getStartedCalls(){
-        List<Calls> startedCalls = callsInterfaceRepository.findAll();
-        startedCalls =startedCalls.stream().filter(call -> call.isStarted()).collect(Collectors.toList());
+        List<Calls> startedCalls = callsInterfaceRepository.getStartedCalls();
         return startedCalls.stream().map(calls -> mapToDTO(calls))
                 .collect(Collectors.toList());
     }
 
     public List<CallsDTO> getSolveCalls(){
-        List<Calls> solveCalls = callsInterfaceRepository.findAll();
-        solveCalls =solveCalls.stream().filter(call -> call.getStatus().equals("solve")).collect(Collectors.toList());
+        List<Calls> solveCalls = callsInterfaceRepository.getSolveCalls();
         return solveCalls.stream().map(calls -> mapToDTO(calls))
                 .collect(Collectors.toList());
     }
 
     public List<CallsDTO> getNotSolveCalls(){
-        List<Calls> notSolveCalls = callsInterfaceRepository.findAll();
-        notSolveCalls =notSolveCalls.stream().filter(call -> call.getStatus().equals("notsolve")).collect(Collectors.toList());
+        List<Calls> notSolveCalls = callsInterfaceRepository.getNotSolveCalls();
         return notSolveCalls.stream().map(calls -> mapToDTO(calls))
                 .collect(Collectors.toList());
     }

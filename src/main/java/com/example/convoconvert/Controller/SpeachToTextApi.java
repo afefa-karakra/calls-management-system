@@ -14,8 +14,26 @@ import java.io.IOException;
 @RequestMapping("/Api")
 public class SpeachToTextApi {
 
-    @Autowired
-    private SpeachToTextService speachToTextService;
+
+//    RestTemplate restTemplate = new RestTemplate();
+//
+//    private static final String url = "";
+//
+//    @Bean
+//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//        return builder.build();
+//    }
+//
+//    @Bean
+//    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+//        return args -> {
+//
+//
+//        };
+//
+//    }
+@Autowired
+private SpeachToTextService speachToTextService;
 
     @PostMapping("/text")
     public ResponseEntity<String> transcribeAudio(@RequestParam("file") MultipartFile file) {

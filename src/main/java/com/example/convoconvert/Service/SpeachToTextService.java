@@ -1,37 +1,70 @@
 package com.example.convoconvert.Service;
 
-import com.example.convoconvert.Service.Interface.SpeachToTextInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import okhttp3.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
-import java.io.IOException;
 @Service
-public class SpeachToTextService implements SpeachToTextInterface {
+public class SpeachToTextService{
 
-    private String apiKey="P54CdayyiQYCFZ6NkGCFV6doXtk4v6pe";
-    private static final String URL = "https://api.speechmatics.com/v2/jobs/";
+    @Autowired
+    private RestTemplate restTemplate;
 
-    public String transcribe(File audioFile) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+//    public String createTranscriptionJob(String filePath) {
+//        try {
+//            String url = "https://asr.api.speechmatics.com/v2/jobs/";
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+//            headers.set("Authorization", "Bearer 2ffRxB9aEbHd5LFmIRZwiH0iuGNoRcpQ");
+//
+//            String config = "{\"type\": \"transcription\",\"transcription_config\": { \"operating_point\":\"enhanced\", \"language\": \"en\", \"enable_entities\": true}}";
+//
+//            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+//            body.add("config", config);
+//            body.add("file", new FileSystemResource(new File(filePath)));
+//
+//            HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+//
+//            ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
+//
+//            return response.getBody();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "{\"error\": \"An error occurred while processing the transcription job\"}";
+//        }
+//    }
 
-        MediaType mediaType = MediaType.parse("audio/wav");
-        RequestBody body = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("data_file", audioFile.getName(),
-                        RequestBody.create(mediaType, audioFile))
-                .addFormDataPart("transcription_config", "{\"language\": \"en\"}")
-                .build();
+    public void makePostRequest() {
+        RestTemplate restTemplate = new RestTemplate();
 
-        Request request = new Request.Builder()
-                .url(URL)
-                .post(body)
-                .addHeader("Authorization", "Bearer " + apiKey)
-                .build();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer 2ffRxB9aEbHd5LFmIRZwiH0iuGNoRcpQ");
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
-        Response response = client.newCall(request).execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("config", "{\"type\": \"transcription\",\"transcription_config\": { \"operating_point\":\"enhanced\", \"language\": \"en\", \"enable_entities\": true}}");
 
-        return response.body().string();
+        // Make sure the path points to the correct location of your file
+        Resource fileResource = new FileSystemResource("C:\\Users\\Lenovo\\Downloads\\example.wav");
+        body.add("data_file", fileResource);
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                "https://asr.api.speechmatics.com/v2/jobs/",
+                HttpMethod.POST,
+                requestEntity,
+                String.class
+        );
+
+        System.out.println("Response: " + response.getBody());
     }
+
 }

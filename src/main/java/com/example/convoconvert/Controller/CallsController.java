@@ -104,4 +104,9 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getEntityClassesByCallId( id));
     }
 
+    @GetMapping("/date")
+    public ResponseEntity<List<CallsDTO>> getDateByCallId(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));
+    }
+
 }

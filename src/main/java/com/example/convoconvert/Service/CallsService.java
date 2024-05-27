@@ -131,6 +131,13 @@ public class CallsService implements CallsServiceInterface {
                 .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<CallsDTO> getDateByCallId(long id) {
+        List<String> date= callsInterfaceRepository.getDateByCallId(id);
+        return date.stream()
+                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+    }
+
     private CallsDTO mapToDTO(Calls calls) {
         CallsDTO callsDTO = new CallsDTO();
         callsDTO.setId(calls.getId());

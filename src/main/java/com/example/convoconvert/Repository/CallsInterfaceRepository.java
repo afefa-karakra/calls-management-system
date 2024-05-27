@@ -31,4 +31,7 @@ public interface CallsInterfaceRepository extends JpaRepository<Calls, Long> {
     @Query("SELECT c.entityClasses FROM Calls c WHERE c.id = :id")
     List<String> getEntityClassesByCallId(long id);
 
+    @Query("SELECT c.date FROM Calls c WHERE c.id = :id")
+    List<String> getDateByCallId(long id);
+
 }

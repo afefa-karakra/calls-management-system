@@ -27,4 +27,7 @@ public interface CallsServiceInterface {
 
     List<CallsDTO> getnerTagsByCallId(long id);
     List<CallsDTO> getEntityClassesByCallId(long id);
+
+    List<CallsDTO> getDateByCallId(long id);
+
 }

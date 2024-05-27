@@ -110,6 +110,13 @@ public class CallsService implements CallsServiceInterface {
 
     }
 
+    public List<CallsDTO> getKeywordsByCallId(long id) {
+        List<String> keywords = callsInterfaceRepository.getKeywordsByCallId(id);
+        return keywords.stream()
+                .map(keyword -> new CallsDTO(keyword))
+                .collect(Collectors.toList());
+    }
+
 
     private CallsDTO mapToDTO(Calls calls) {
         CallsDTO callsDTO = new CallsDTO();

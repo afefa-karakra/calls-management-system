@@ -22,4 +22,7 @@ public interface CallsServiceInterface {
     List<CallsDTO> getSolveCalls();
     List<CallsDTO> getNotSolveCalls();
     List<CallsDTO> getListOfCallsFillter(long id , Date date);
+
+    List<CallsDTO> getKeywordsByCallId(long id);
+
 }

@@ -18,7 +18,6 @@ public class CallsDTO {
     private long id;
     private String audio;
     private String audioText;
-    private String textEntities;
     private Time time;
     private Date date;
     private boolean started;
@@ -28,4 +27,8 @@ public class CallsDTO {
     private String entityClasses;
     private boolean trash;
 
+
+    public CallsDTO(String keywords) {
+        this.keywords = keywords;
+    }
 }

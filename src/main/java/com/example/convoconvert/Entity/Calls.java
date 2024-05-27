@@ -32,9 +32,6 @@ public class Calls implements Serializable {
     @Column(name = "audio", nullable = true)
     private byte[] audio;
 
-    @Column(name = "textEntities", nullable = true)
-    private String textEntities;
-
     @Column(name = "time", nullable = true)
     private Time time;
 

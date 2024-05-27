@@ -90,4 +90,9 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, date));
     }
 
+    @GetMapping("/keywords")
+    public ResponseEntity<List<CallsDTO>> getkeywordsCalls(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getKeywordsByCallId( id));
+    }
+
 }

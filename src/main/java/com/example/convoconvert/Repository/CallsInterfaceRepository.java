@@ -1,8 +1,6 @@
 package com.example.convoconvert.Repository;
 
-import com.example.convoconvert.DTO.CallsDTO;
 import com.example.convoconvert.Entity.Calls;
-import com.example.convoconvert.Entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,5 +21,8 @@ public interface CallsInterfaceRepository extends JpaRepository<Calls, Long> {
 
     @Query("SELECT e.id AS employeeId, c.date AS callDate FROM Employee e JOIN Calls c")
     List<Calls> getListOfCallsFillter (long id , Date date);
+
+    @Query("SELECT c.keywords FROM Calls c WHERE c.id = :id")
+    List<String> getKeywordsByCallId(long id);
 
 }

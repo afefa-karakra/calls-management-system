@@ -25,4 +25,10 @@ public interface CallsInterfaceRepository extends JpaRepository<Calls, Long> {
     @Query("SELECT c.keywords FROM Calls c WHERE c.id = :id")
     List<String> getKeywordsByCallId(long id);
 
+    @Query("SELECT c.nerTags FROM Calls c WHERE c.id = :id")
+    List<String> getnerTagsByCallId(long id);
+
+    @Query("SELECT c.entityClasses FROM Calls c WHERE c.id = :id")
+    List<String> getEntityClassesByCallId(long id);
+
 }

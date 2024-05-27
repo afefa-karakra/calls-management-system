@@ -25,4 +25,6 @@ public interface CallsServiceInterface {
 
     List<CallsDTO> getKeywordsByCallId(long id);
 
+    List<CallsDTO> getnerTagsByCallId(long id);
+    List<CallsDTO> getEntityClassesByCallId(long id);
 }

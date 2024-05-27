@@ -113,10 +113,23 @@ public class CallsService implements CallsServiceInterface {
     public List<CallsDTO> getKeywordsByCallId(long id) {
         List<String> keywords = callsInterfaceRepository.getKeywordsByCallId(id);
         return keywords.stream()
-                .map(keyword -> new CallsDTO(keyword))
+                .map(calls -> new CallsDTO(calls))
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<CallsDTO> getnerTagsByCallId(long id) {
+        List<String> nerTags = callsInterfaceRepository.getnerTagsByCallId(id);
+        return nerTags.stream()
+                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CallsDTO> getEntityClassesByCallId(long id) {
+        List<String> entityClasses = callsInterfaceRepository.getEntityClassesByCallId(id);
+        return entityClasses.stream()
+                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+    }
 
     private CallsDTO mapToDTO(Calls calls) {
         CallsDTO callsDTO = new CallsDTO();

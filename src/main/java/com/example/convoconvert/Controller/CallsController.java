@@ -94,5 +94,14 @@ public class CallsController {
     public ResponseEntity<List<CallsDTO>> getkeywordsCalls(@RequestParam long id){
         return ResponseEntity.ok().body(callsServiceInterface.getKeywordsByCallId( id));
     }
+    @GetMapping("/nerTags")
+    public ResponseEntity<List<CallsDTO>> getnerTagsByCallId(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getnerTagsByCallId( id));
+    }
+
+    @GetMapping("/entityClasses")
+    public ResponseEntity<List<CallsDTO>> getEntityClassesByCallId(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getEntityClassesByCallId( id));
+    }
 
 }

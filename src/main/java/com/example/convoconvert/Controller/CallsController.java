@@ -27,18 +27,21 @@ public class CallsController {
     private CallsServiceInterface callsServiceInterface;
     private final Logger log = LoggerFactory.getLogger(CallsController.class);
 
+    @CrossOrigin
     @GetMapping("/get")
     public ResponseEntity<CallsDTO> getCallsById(@RequestParam long id){
 
         return ResponseEntity.ok(callsServiceInterface.getCallById(id));
     }
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<CallsDTO>> getAllCalls (){
 
         return ResponseEntity.ok().body(callsServiceInterface.getAllCalls());
     }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<CallsDTO> createCalls (@Valid @RequestBody CallsDTO callsDTO) {
 
@@ -50,6 +53,7 @@ public class CallsController {
 
         return ResponseEntity.ok().body(callsServiceInterface.createCall(callsDTO));
 }
+    @CrossOrigin
     @PutMapping ("/{id}")
     public ResponseEntity<CallsDTO> updateCallls
             (@Valid @RequestBody CallsDTO callsDTO
@@ -58,6 +62,7 @@ public class CallsController {
         return new ResponseEntity<>(callsServiceInterface.updateCall(callsDTO, id), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PatchMapping ("/{id}")
     public ResponseEntity<CallsDTO> updateFieldsOfCallls
             (@Valid @RequestBody Map<String , Optional> map
@@ -66,27 +71,32 @@ public class CallsController {
         return new ResponseEntity<>(callsServiceInterface.updateFieldsOfCall(id , map), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCalls (@PathVariable(name = "id") long id){
         callsServiceInterface.deleteCallById(id);
         return new ResponseEntity<>("Deleted successfully!", HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/started")
     public ResponseEntity<List<CallsDTO>> getStartedCalls(){
         return ResponseEntity.ok().body(callsServiceInterface.getStartedCalls());
     }
 
+    @CrossOrigin
     @GetMapping("/solved")
     public ResponseEntity<List<CallsDTO>> getSolveCalls(){
         return ResponseEntity.ok().body(callsServiceInterface.getSolveCalls());
     }
 
+    @CrossOrigin
     @GetMapping("/notsolved")
     public ResponseEntity<List<CallsDTO>> getNotSolveCalls(){
         return ResponseEntity.ok().body(callsServiceInterface.getNotSolveCalls());
     }
 
+    @CrossOrigin
     @GetMapping("/fillter")
     public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id ,   @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date date){
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -94,20 +104,23 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, sqlDate));
     }
 
+    @CrossOrigin
     @GetMapping("/keywords")
     public ResponseEntity<List<CallsDTO>> getkeywordsCalls(@RequestParam long id){
         return ResponseEntity.ok().body(callsServiceInterface.getKeywordsByCallId( id));
     }
+    @CrossOrigin
     @GetMapping("/nerTags")
     public ResponseEntity<List<CallsDTO>> getnerTagsByCallId(@RequestParam long id){
         return ResponseEntity.ok().body(callsServiceInterface.getnerTagsByCallId( id));
     }
 
+    @CrossOrigin
     @GetMapping("/entityClasses")
     public ResponseEntity<List<CallsDTO>> getEntityClassesByCallId(@RequestParam long id){
         return ResponseEntity.ok().body(callsServiceInterface.getEntityClassesByCallId( id));
     }
-
+    @CrossOrigin
     @GetMapping("/date")
     public ResponseEntity<List<CallsDTO>> getDateByCallId(@RequestParam long id){
         return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));

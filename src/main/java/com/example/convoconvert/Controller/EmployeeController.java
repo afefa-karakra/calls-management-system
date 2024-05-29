@@ -30,19 +30,19 @@ public class EmployeeController {
     private EmployeeServiceInterface employeeServiceInterface;
     private final Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
-
+    @CrossOrigin
     @GetMapping("/get")
     public ResponseEntity<EmployeeDTO> getEmployeeById(@RequestParam long id){
 
         return ResponseEntity.ok(employeeServiceInterface.getEmployeeById(id));
     }
-
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<EmployeeDTO>> getAllEmployee (){
 
         return ResponseEntity.ok().body(employeeServiceInterface.getAllEmployee());
     }
-
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<EmployeeDTO> createEmployee (@Valid @RequestBody EmployeeDTO employeeDTO) {
 
@@ -56,7 +56,7 @@ public class EmployeeController {
         //return new ResponseEntity(employeeServiceInterface.createEmployee(employeeDTO), HttpStatus.CREATED);
 
     }
-
+    @CrossOrigin
     @PutMapping ("/{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee
             (@Valid @RequestBody EmployeeDTO employeeDTO
@@ -72,7 +72,7 @@ public class EmployeeController {
 
       //  return new ResponseEntity<>(employeeServiceInterface.updateEmployee(employeeDTO, name), HttpStatus.OK);
     }*/
-
+   @CrossOrigin
     @PatchMapping ("/{id}")
     public ResponseEntity<EmployeeDTO> updateFieldsOfEmployee
             (@Valid @RequestBody Map<String , Optional> map
@@ -81,7 +81,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeServiceInterface.updateFieldsOfEmployee(id , map), HttpStatus.OK);
     }
 
-
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEmployee (@PathVariable(name = "id") long id){
         employeeServiceInterface.deleteEmployeeById(id);

@@ -15,6 +15,7 @@ public class SpeachToTextApi {
     @Autowired
     private SpeachToTextService speachToTextService;
 
+    @CrossOrigin
     @PostMapping("/transcribe")
     public ResponseEntity<String> convertSpeechToText(@RequestParam("file") MultipartFile file) throws IOException {
         if (file.isEmpty()) {

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -104,8 +104,8 @@ public class CallsService implements CallsServiceInterface {
     }
 
     @Override
-    public List<CallsDTO> getListOfCallsFillter(long id, Date date) {
-        List<Calls> callsList = callsInterfaceRepository.getListOfCallsFillter(id , date);
+    public List<CallsDTO> getListOfCallsFillter(long id,  java.sql.Date date) {
+        List<Calls> callsList = callsInterfaceRepository.getListOfCallsFilter(id , date);
         return callsList.stream().map(calls -> mapToDTO(calls)).collect(Collectors.toList());
 
     }

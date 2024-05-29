@@ -4,7 +4,7 @@ import com.example.convoconvert.DTO.CallsDTO;
 import com.example.convoconvert.DTO.EmployeeDTO;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public interface CallsServiceInterface {
     List<CallsDTO> getStartedCalls();
     List<CallsDTO> getSolveCalls();
     List<CallsDTO> getNotSolveCalls();
-    List<CallsDTO> getListOfCallsFillter(long id , Date date);
+    List<CallsDTO> getListOfCallsFillter(long id , java.sql.Date date);
 
     List<CallsDTO> getKeywordsByCallId(long id);
 

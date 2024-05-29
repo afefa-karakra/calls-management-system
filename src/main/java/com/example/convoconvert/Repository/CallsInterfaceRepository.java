@@ -14,10 +14,10 @@ public interface CallsInterfaceRepository extends JpaRepository<Calls, Long> {
     @Query("SELECT c FROM Calls c WHERE c.started = true")
     List<Calls> getStartedCalls();
 
-    @Query("SELECT c FROM Calls c WHERE c.status = 'solve' ")
+    @Query("SELECT c FROM Calls c WHERE c.status = 'solved' ")
     List<Calls> getSolveCalls();
 
-    @Query("SELECT c FROM Calls c WHERE c.status = 'notsolve' ")
+    @Query("SELECT c FROM Calls c WHERE c.status = 'notsolved' ")
     List<Calls> getNotSolveCalls();
 
 //    @Query("SELECT e.id AS employeeId, c.date AS callDate FROM Employee e JOIN Calls c")

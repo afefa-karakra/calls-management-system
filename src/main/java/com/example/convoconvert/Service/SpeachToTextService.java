@@ -67,6 +67,7 @@ public class SpeachToTextService {
             jobStatus = jsonNode2.get("job").get("status").asText();
             System.out.println("status: "+jobStatus);
         }
+        System.out.println("https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt");
         return restTemplate.exchange(
                 "https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt",
                 HttpMethod.GET,
@@ -75,6 +76,5 @@ public class SpeachToTextService {
         );
 
     }
-
 
 }

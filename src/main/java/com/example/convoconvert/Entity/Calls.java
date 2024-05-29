@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.Date;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
+
 
 @Data
 @AllArgsConstructor
@@ -31,9 +32,6 @@ public class Calls implements Serializable {
 
     @Column(name = "audio", nullable = true)
     private byte[] audio;
-
-    @Column(name = "textEntities", nullable = true)
-    private String textEntities;
 
     @Column(name = "time", nullable = true)
     private Time time;

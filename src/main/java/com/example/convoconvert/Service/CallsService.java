@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -104,12 +104,39 @@ public class CallsService implements CallsServiceInterface {
     }
 
     @Override
-    public List<CallsDTO> getListOfCallsFillter(long id, Date date) {
-        List<Calls> callsList = callsInterfaceRepository.getListOfCallsFillter(id , date);
+    public List<CallsDTO> getListOfCallsFillter(long id,  java.sql.Date date) {
+        List<Calls> callsList = callsInterfaceRepository.getListOfCallsFilter(id , date);
         return callsList.stream().map(calls -> mapToDTO(calls)).collect(Collectors.toList());
 
     }
 
+    public List<CallsDTO> getKeywordsByCallId(long id) {
+        List<String> keywords = callsInterfaceRepository.getKeywordsByCallId(id);
+        return keywords.stream()
+                .map(calls -> new CallsDTO(calls))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CallsDTO> getnerTagsByCallId(long id) {
+        List<String> nerTags = callsInterfaceRepository.getnerTagsByCallId(id);
+        return nerTags.stream()
+                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CallsDTO> getEntityClassesByCallId(long id) {
+        List<String> entityClasses = callsInterfaceRepository.getEntityClassesByCallId(id);
+        return entityClasses.stream()
+                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CallsDTO> getDateByCallId(long id) {
+        List<String> date= callsInterfaceRepository.getDateByCallId(id);
+        return date.stream()
+                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+    }
 
     private CallsDTO mapToDTO(Calls calls) {
         CallsDTO callsDTO = new CallsDTO();

@@ -9,14 +9,16 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/Calls")
@@ -86,8 +88,29 @@ public class CallsController {
     }
 
     @GetMapping("/fillter")
-    public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id , Date date){
-        return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, date));
+    public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id ,   @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date date){
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+       // return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, (java.sql.Date) date));
+        return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, sqlDate));
+    }
+
+    @GetMapping("/keywords")
+    public ResponseEntity<List<CallsDTO>> getkeywordsCalls(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getKeywordsByCallId( id));
+    }
+    @GetMapping("/nerTags")
+    public ResponseEntity<List<CallsDTO>> getnerTagsByCallId(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getnerTagsByCallId( id));
+    }
+
+    @GetMapping("/entityClasses")
+    public ResponseEntity<List<CallsDTO>> getEntityClassesByCallId(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getEntityClassesByCallId( id));
+    }
+
+    @GetMapping("/date")
+    public ResponseEntity<List<CallsDTO>> getDateByCallId(@RequestParam long id){
+        return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));
     }
 
 }

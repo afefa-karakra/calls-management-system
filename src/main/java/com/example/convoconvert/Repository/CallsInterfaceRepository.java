@@ -1,5 +1,6 @@
 package com.example.convoconvert.Repository;
 
+import com.example.convoconvert.DTO.CallsDTO;
 import com.example.convoconvert.Entity.Calls;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,16 +21,13 @@ public interface CallsInterfaceRepository extends JpaRepository<Calls, Long> {
     @Query("SELECT c FROM Calls c WHERE c.status = 'notsolved' ")
     List<Calls> getNotSolveCalls();
 
-//    @Query("SELECT e.id AS employeeId, c.date AS callDate FROM Employee e JOIN Calls c")
-//    List<Calls> getListOfCallsFillter (long id , Date date);
+    @Query("SELECT e.id, c.audio, c.audioText, c.date, c.time, c.started, c.status, c.keywords, c.nerTags, c.entityClasses, c.trash " +
+            "FROM Calls c " +
+            "JOIN Employee e ON c.id = e.id " +
+            "WHERE e.id = :employeeId AND c.date = :callDate")
+    List<Calls> getListOfCallsFilter(@Param("employeeId") Long employeeId, @Param("callDate") Date callDate);
 
-//    @Query("SELECT c FROM Calls c JOIN Entity e")
-//    List<Calls> getListOfCallsFilter(long id, java.sql.Date date);
 
-    @Query("SELECT e.id, c.date " +
-            "FROM Calls c JOIN Employee e ON c.id = e.id " +
-            "WHERE e.id = :id AND c.date = :date")
-    List<Calls> getListOfCallsFilter(@Param("id") long id, @Param("date") java.sql.Date date);
 
     @Query("SELECT c.keywords FROM Calls c WHERE c.id = :id")
     List<String> getKeywordsByCallId(long id);
@@ -42,5 +40,18 @@ public interface CallsInterfaceRepository extends JpaRepository<Calls, Long> {
 
     @Query("SELECT c.date FROM Calls c WHERE c.id = :id")
     List<String> getDateByCallId(long id);
+
+    @Query("SELECT " +
+            "    cu.id AS customer_idfk, " +
+            "    e.name AS name, " +
+            "    c.audioText, " +
+            "    c.audio, " +
+            "    c.started " +
+            "FROM Calls c " +
+            "JOIN Customer cu ON c.customer.id = cu.id " +
+            "JOIN Employee e ON c.employee.name = e.name")
+    List<String> geDataWithEmployeeNameAndCustomerId();
+
+
 
 }

@@ -2,6 +2,7 @@ package com.example.convoconvert.Service.Interface;
 
 import com.example.convoconvert.DTO.CallsDTO;
 import com.example.convoconvert.DTO.EmployeeDTO;
+import com.example.convoconvert.Entity.Calls;
 
 
 import java.util.Date;
@@ -29,5 +30,7 @@ public interface CallsServiceInterface {
     List<CallsDTO> getEntityClassesByCallId(long id);
 
     List<CallsDTO> getDateByCallId(long id);
+
+    List<CallsDTO> geDataWithEmployeeNameAndCustomerId();
 
 }

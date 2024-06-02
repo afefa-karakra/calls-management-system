@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -76,5 +77,7 @@ public class Employee implements Serializable {
     @Column(name = "comments", nullable = true)
     private String comments;
 
+    @OneToMany(mappedBy = "employee")
+    private Set<Calls> calls;
 
 }

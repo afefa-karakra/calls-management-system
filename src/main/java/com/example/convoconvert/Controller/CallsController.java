@@ -1,10 +1,8 @@
 package com.example.convoconvert.Controller;
 
 import com.example.convoconvert.DTO.CallsDTO;
-import com.example.convoconvert.DTO.EmployeeDTO;
 import com.example.convoconvert.Exception.BadRequestException;
 import com.example.convoconvert.Service.Interface.CallsServiceInterface;
-import com.example.convoconvert.Service.Interface.EmployeeServiceInterface;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,11 +96,18 @@ public class CallsController {
 
     @CrossOrigin
     @GetMapping("/fillter")
-    public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id ,   @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS") Date date){
+    public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id ,@RequestParam("date")Date date){
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
        // return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, (java.sql.Date) date));
         return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, sqlDate));
     }
+
+    @GetMapping("filter")
+    public ResponseEntity<List<CallsDTO>> getFilteredCalls(@RequestParam("employeeId") long employeeId, @RequestParam("callDate")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.sql.Date callDate) {
+        List<CallsDTO> callsList = callsServiceInterface.getListOfCallsFillter(employeeId, callDate);
+        return ResponseEntity.ok(callsList);
+    }
+
 
     @CrossOrigin
     @GetMapping("/keywords")
@@ -124,6 +129,13 @@ public class CallsController {
     @GetMapping("/date")
     public ResponseEntity<List<CallsDTO>> getDateByCallId(@RequestParam long id){
         return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));
+    }
+
+    @CrossOrigin
+    @GetMapping("CallsSpecific")
+    public ResponseEntity<List<CallsDTO>> geDataWithEmployeeNameAndCustomerId (){
+
+        return ResponseEntity.ok().body(callsServiceInterface.geDataWithEmployeeNameAndCustomerId());
     }
 
 }

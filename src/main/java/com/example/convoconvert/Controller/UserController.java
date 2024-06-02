@@ -14,6 +14,7 @@ public class UserController {
     @Autowired
     private UserServiceInterface userServiceInterface;
 
+    @CrossOrigin
     @PostMapping("/login")
     String correctUser(@RequestBody User user){
         return userServiceInterface.correctUser(user);

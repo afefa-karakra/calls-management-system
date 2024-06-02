@@ -25,18 +25,19 @@ public class CustomerController {
     @Autowired
     private CustomerServiceInterface customerServiceInterface;
     private final Logger log = LoggerFactory.getLogger(CustomerController.class);
-
+    @CrossOrigin
     @GetMapping("/get")
     public ResponseEntity<CustomerDTO> getCustomerById(@RequestParam long id){
 
         return ResponseEntity.ok(customerServiceInterface.getCustomerById(id));
     }
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<CustomerDTO>> getAllCustomer (){
 
         return ResponseEntity.ok().body(customerServiceInterface.getAllCustomer());
     }
-
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<CustomerDTO> createCustomer (@Valid @RequestBody CustomerDTO customerDTO) {
 
@@ -49,7 +50,7 @@ public class CustomerController {
         return ResponseEntity.ok().body(customerServiceInterface.createCustomer(customerDTO));
 
     }
-
+    @CrossOrigin
     @PutMapping ("/{id}")
     public ResponseEntity<CustomerDTO> updateCustomer
             (@Valid @RequestBody CustomerDTO customerDTO
@@ -57,7 +58,7 @@ public class CustomerController {
 
         return new ResponseEntity<>(customerServiceInterface.updateCustomer(customerDTO, id), HttpStatus.OK);
     }
-
+    @CrossOrigin
     @PatchMapping ("/{id}")
     public ResponseEntity<CustomerDTO> updateFieldsOfCustomer
             (@Valid @RequestBody Map<String , Optional> map
@@ -65,7 +66,7 @@ public class CustomerController {
 
         return new ResponseEntity<>(customerServiceInterface.updateFieldsOfCustomer(id , map), HttpStatus.OK);
     }
-
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer (@PathVariable(name = "id") long id){
         customerServiceInterface.deleteCustomerById(id);

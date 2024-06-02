@@ -2,6 +2,7 @@ package com.example.convoconvert.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kong.unirest.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
@@ -39,13 +40,14 @@ public class SpeachToTextService {
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> response= restTemplate.exchange(
+        ResponseEntity<String> responseID= restTemplate.exchange(
                 "https://asr.api.speechmatics.com/v2/jobs/",
                 HttpMethod.POST,
                 requestEntity,
                 String.class
         );
-        String responseBody = response.getBody();
+        String responseBody = responseID.getBody();
+        System.out.println(responseBody);
         JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
         String jobid = jsonNode.get("id").asText();
         System.out.println("id: "+jobid);
@@ -68,13 +70,26 @@ public class SpeachToTextService {
             System.out.println("status: "+jobStatus);
         }
         System.out.println("https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt");
-        return restTemplate.exchange(
+        ResponseEntity<String> responseText =restTemplate.exchange(
                 "https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt",
                 HttpMethod.GET,
                 transcriptRequestEntity,
                 String.class
         );
-
+        String text=responseText.getBody();
+        System.out.println("text: "+text);
+        HttpHeaders wojoodHeaders = new HttpHeaders();
+        wojoodHeaders.set("User-Agent","Mozilla/5.0");
+        wojoodHeaders.set("Content-Type", "application/json");
+        String WojoodBody=String.format("{ \"sentence\": \"%s\", \"mode\": \"1\" }", text);
+        HttpEntity<String> wojoodRequestEntity = new HttpEntity<>(WojoodBody, wojoodHeaders);
+        return restTemplate.exchange(
+                "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",
+                HttpMethod.POST,
+                wojoodRequestEntity,
+                String.class
+        );
     }
-
 }
+
+

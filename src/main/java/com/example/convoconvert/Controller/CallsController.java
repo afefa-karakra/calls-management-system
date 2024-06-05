@@ -133,7 +133,7 @@ public class CallsController {
 
     @CrossOrigin
     @GetMapping("CallsSpecific")
-    public ResponseEntity<List<CallsDTO>> geDataWithEmployeeNameAndCustomerId (){
+    public ResponseEntity<List<Object[]>> geDataWithEmployeeNameAndCustomerId (){
 
         return ResponseEntity.ok().body(callsServiceInterface.geDataWithEmployeeNameAndCustomerId());
     }

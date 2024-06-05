@@ -54,6 +54,7 @@ public class Calls implements Serializable {
     @Column(name = "trash", nullable = true)
     private boolean trash;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerIdFK", referencedColumnName = "id")
     private Customer customer;
@@ -61,4 +62,5 @@ public class Calls implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employeeIdFK", referencedColumnName = "id")
     private Employee employee;
+
 }

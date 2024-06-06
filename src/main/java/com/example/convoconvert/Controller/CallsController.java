@@ -131,11 +131,11 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));
     }
 
-    @CrossOrigin
-    @GetMapping("CallsSpecific")
-    public ResponseEntity<List<CallsDTO>> geDataWithEmployeeNameAndCustomerId (){
-
-        return ResponseEntity.ok().body(callsServiceInterface.geDataWithEmployeeNameAndCustomerId());
-    }
+//    @CrossOrigin
+//    @GetMapping("CallsSpecific")
+//    public ResponseEntity<List<CallsDTO>> geDataWithEmployeeNameAndCustomerId (){
+//
+//        return ResponseEntity.ok().body(callsServiceInterface.geDataWithEmployeeNameAndCustomerId());
+//    }
 
 }

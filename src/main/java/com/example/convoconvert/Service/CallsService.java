@@ -139,19 +139,24 @@ public class CallsService implements CallsServiceInterface {
                 .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
     }
 
-    @Override
-    public List<CallsDTO> geDataWithEmployeeNameAndCustomerId() {
-
-        List<String> data = callsInterfaceRepository.geDataWithEmployeeNameAndCustomerId();
-        return data.stream()
-                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
-    }
+//    @Override
+//    public List<CallsDTO> geDataWithEmployeeNameAndCustomerId() {
+//
+//        List<String> data = callsInterfaceRepository.geDataWithEmployeeNameAndCustomerId();
+//        return data.stream()
+//                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+//    }
 
     private CallsDTO mapToDTO(Calls calls) {
         CallsDTO callsDTO = new CallsDTO();
         callsDTO.setId(calls.getId());
         callsDTO.setAudioText(calls.getAudioText());
         callsDTO.setDate(calls.getDate());
+        callsDTO.setKeywords(calls.getKeywords());
+        callsDTO.setStatus(calls.getStatus());
+        callsDTO.setEntityClasses(calls.getEntityClasses());
+        callsDTO.setNerTags(calls.getNerTags());
+
 
         return callsDTO;
     }

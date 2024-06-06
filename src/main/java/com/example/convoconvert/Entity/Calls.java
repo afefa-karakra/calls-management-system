@@ -51,8 +51,9 @@ public class Calls implements Serializable {
     @Column(name = "entityClasses", nullable = true)
     private String entityClasses;
 
-    @Column(name = "trash", nullable = true)
+    @Column(name = "trash")
     private boolean trash;
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerIdFK", referencedColumnName = "id")
@@ -61,4 +62,5 @@ public class Calls implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employeeIdFK", referencedColumnName = "id")
     private Employee employee;
+
 }

@@ -2,6 +2,7 @@ package com.example.convoconvert.DTO;
 
 import java.sql.Blob;
 import java.sql.Time;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -31,4 +32,6 @@ public class CallsDTO {
     public CallsDTO(String keywords) {
         this.keywords = keywords;
     }
+
+
 }

@@ -1,7 +1,9 @@
 package com.example.convoconvert.Controller;
 
 import com.example.convoconvert.DTO.CallsDTO;
+import com.example.convoconvert.DTO.CombinedDTO;
 import com.example.convoconvert.Exception.BadRequestException;
+import com.example.convoconvert.Service.DataTransformationService;
 import com.example.convoconvert.Service.Interface.CallsServiceInterface;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -23,6 +25,9 @@ import java.util.Optional;
 public class CallsController {
     @Autowired
     private CallsServiceInterface callsServiceInterface;
+
+    @Autowired
+    private DataTransformationService dataTransformationService;
     private final Logger log = LoggerFactory.getLogger(CallsController.class);
 
     @CrossOrigin
@@ -131,11 +136,18 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));
     }
 
-//    @CrossOrigin
-//    @GetMapping("CallsSpecific")
-//    public ResponseEntity<List<CallsDTO>> geDataWithEmployeeNameAndCustomerId (){
-//
-//        return ResponseEntity.ok().body(callsServiceInterface.geDataWithEmployeeNameAndCustomerId());
-//    }
+    @CrossOrigin
+    @GetMapping("CallsSpecific")
+    public ResponseEntity<List<Object[]>> geDataWithEmployeeNameAndCustomerId (){
+
+        return ResponseEntity.ok().body(callsServiceInterface.geDataWithEmployeeNameAndCustomerId());
+    }
+
+    @CrossOrigin
+    @GetMapping("/CallsSpecificV2")
+    public ResponseEntity<List<CombinedDTO>> getTransformedData() {
+        List<CombinedDTO> transformedData = dataTransformationService.getTransformedData();
+        return ResponseEntity.ok().body(transformedData);
+    }
 
 }

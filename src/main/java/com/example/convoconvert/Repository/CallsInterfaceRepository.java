@@ -41,30 +41,28 @@ public interface CallsInterfaceRepository extends JpaRepository<Calls, Long> {
     @Query("SELECT c.date FROM Calls c WHERE c.id = :id")
     List<String> getDateByCallId(long id);
 
-//    @Query("SELECT " +
-//            "    cu.id AS customer_idfk, " +
-//            "    e.name AS name, " +
-//            "    c.audioText, " +
-//            "    c.audio, " +
-//            "    c.started " +
-//            "FROM Calls c " +
-//            "JOIN Customer cu ON c.customer.id = cu.id " +
-//            "JOIN Employee e ON c.employee.name = e.name")
-//    List<String> geDataWithEmployeeNameAndCustomerId();
 
     @Query("SELECT " +
             "    cu.id AS customerId, " +
             "    cu.name AS customerName, " +
             "    e.name AS employeeName, " +
+            "    cu.phoneNumber As customerphoneNumber,"+
             "    c.audioText, " +
             "    c.audio, " +
             "    c.nerTags,"+
             "    c.entityClasses,"+
             "    c.keywords,"+
+            "    c.status, "+
             "    c.started " +
             "FROM Calls c " +
             "JOIN c.customer cu " +
             "JOIN c.employee e")
     List<Object []> geDataWithEmployeeNameAndCustomerId();
+
+//    @Query("SELECT c, cu, e " +
+//            "FROM Calls c " +
+//            "JOIN c.customer cu " +
+//            "JOIN c.employee e")
+//    List<Object[]> geDataWithEmployeeNameAndCustomerId();
 
 }

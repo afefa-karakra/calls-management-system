@@ -51,7 +51,7 @@ public class Calls implements Serializable {
     @Column(name = "entityClasses", nullable = true)
     private String entityClasses;
 
-    @Column(name = "trash", nullable = true)
+    @Column(name = "trash")
     private boolean trash;
 
 

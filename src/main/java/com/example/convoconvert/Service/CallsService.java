@@ -156,8 +156,6 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setStatus(calls.getStatus());
         callsDTO.setEntityClasses(calls.getEntityClasses());
         callsDTO.setNerTags(calls.getNerTags());
-
-
         return callsDTO;
     }
 
@@ -165,9 +163,11 @@ public class CallsService implements CallsServiceInterface {
         Calls calls = new Calls();
         calls.setAudioText(callsDTO.getAudioText());
         calls.setDate(callsDTO.getDate());
-
+        calls.setKeywords(callsDTO.getKeywords());
+        calls.setStatus(callsDTO.getStatus());
+        calls.setEntityClasses(callsDTO.getEntityClasses());
+        calls.setNerTags(callsDTO.getNerTags());
+        calls.setId(callsDTO.getId());
         return calls;
-
     }
-
 }

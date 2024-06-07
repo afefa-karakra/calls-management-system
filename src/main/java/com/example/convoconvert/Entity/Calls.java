@@ -56,11 +56,11 @@ public class Calls implements Serializable {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customerIdFK", referencedColumnName = "id")
+    @JoinColumn(name = "customerIdFK")
     private Customer customer;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeeIdFK", referencedColumnName = "id")
+    @JoinColumn(name = "employeeIdFK")
     private Employee employee;
 
 }

@@ -1,6 +1,7 @@
 package com.example.convoconvert.Service;
 
 import com.example.convoconvert.DTO.CallsDTO;
+import com.example.convoconvert.DTO.CustomerDTO;
 import com.example.convoconvert.Entity.Calls;
 import com.example.convoconvert.Exception.ResourceNotFoundException;
 import com.example.convoconvert.Repository.CallsInterfaceRepository;
@@ -139,6 +140,8 @@ public class CallsService implements CallsServiceInterface {
                 .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
     }
 
+
+
 //    @Override
 //    public List<CallsDTO> geDataWithEmployeeNameAndCustomerId() {
 //
@@ -156,6 +159,10 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setStatus(calls.getStatus());
         callsDTO.setEntityClasses(calls.getEntityClasses());
         callsDTO.setNerTags(calls.getNerTags());
+        callsDTO.setTrash(calls.isTrash());
+        callsDTO.setStarted(calls.isStarted());
+        callsDTO.setCustomerName(calls.getCustomer().getName());
+        callsDTO.setEmployeeName(calls.getEmployee().getName());
         return callsDTO;
     }
 
@@ -168,6 +175,9 @@ public class CallsService implements CallsServiceInterface {
         calls.setEntityClasses(callsDTO.getEntityClasses());
         calls.setNerTags(callsDTO.getNerTags());
         calls.setId(callsDTO.getId());
+        calls.setTrash(callsDTO.isTrash());
+        calls.setStarted(callsDTO.isStarted());
+
         return calls;
     }
 }

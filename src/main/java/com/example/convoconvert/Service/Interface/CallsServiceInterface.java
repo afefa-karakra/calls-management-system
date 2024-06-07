@@ -31,6 +31,5 @@ public interface CallsServiceInterface {
 
     List<CallsDTO> getDateByCallId(long id);
 
-    List<Object[]> geDataWithEmployeeNameAndCustomerId();
 
 }

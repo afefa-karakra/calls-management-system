@@ -27,7 +27,8 @@ public class CallsDTO {
     private String nerTags;
     private String entityClasses;
     private boolean trash;
-
+    private String employeeName;
+    private String customerName;
 
     public CallsDTO(String keywords) {
         this.keywords = keywords;

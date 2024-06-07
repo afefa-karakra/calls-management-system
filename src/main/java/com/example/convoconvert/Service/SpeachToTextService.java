@@ -47,10 +47,10 @@ public class SpeachToTextService {
                 String.class
         );
         String responseBody = responseID.getBody();
-        System.out.println(responseBody);
+//        System.out.println(responseBody);
         JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
         String jobid = jsonNode.get("id").asText();
-        System.out.println("id: "+jobid);
+//        System.out.println("id: "+jobid);
         HttpHeaders transcriptHeaders = new HttpHeaders();
         transcriptHeaders.set("X-SM-EAR-Tag", "<string>");
         transcriptHeaders.set("Authorization", "Bearer UGQ5b3MLYxEE5aue9xZ7OUTMiVR8Athq");
@@ -67,9 +67,9 @@ public class SpeachToTextService {
             );
             JsonNode jsonNode2 = new ObjectMapper().readTree(jobDetails.getBody());
             jobStatus = jsonNode2.get("job").get("status").asText();
-            System.out.println("status: "+jobStatus);
+//            System.out.println("status: "+jobStatus);
         }
-        System.out.println("https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt");
+//        System.out.println("https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt");
         ResponseEntity<String> responseText =restTemplate.exchange(
                 "https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt",
                 HttpMethod.GET,
@@ -77,7 +77,7 @@ public class SpeachToTextService {
                 String.class
         );
         String text=responseText.getBody();
-        System.out.println("text: "+text);
+//        System.out.println("text: "+text);
         HttpHeaders wojoodHeaders = new HttpHeaders();
         wojoodHeaders.set("User-Agent","Mozilla/5.0");
         wojoodHeaders.set("Content-Type", "application/json");

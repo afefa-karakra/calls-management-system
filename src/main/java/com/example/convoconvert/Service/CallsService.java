@@ -1,15 +1,23 @@
 package com.example.convoconvert.Service;
 
 import com.example.convoconvert.DTO.CallsDTO;
-import com.example.convoconvert.DTO.CustomerDTO;
 import com.example.convoconvert.Entity.Calls;
 import com.example.convoconvert.Exception.ResourceNotFoundException;
 import com.example.convoconvert.Repository.CallsInterfaceRepository;
 import com.example.convoconvert.Service.Interface.CallsServiceInterface;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.client.RestTemplate;
 
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +29,13 @@ public class CallsService implements CallsServiceInterface {
 
     @Autowired
     private CallsInterfaceRepository callsInterfaceRepository;
+
+
+    private RestTemplate restTemplate;
+    @Autowired
+    public CallsService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @Override
     public CallsDTO getCallById(long id) {
@@ -140,6 +155,80 @@ public class CallsService implements CallsServiceInterface {
                 .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
     }
 
+    @Override
+    public void addCall(MultipartFile file) throws IOException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer UGQ5b3MLYxEE5aue9xZ7OUTMiVR8Athq");
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("config", "{\"type\": \"transcription\",\"transcription_config\": { \"operating_point\":\"enhanced\", \"language\": \"ar\", \"enable_entities\": true}}");
+        body.add("data_file", new ByteArrayResource(file.getBytes()) {
+            @Override
+            public String getFilename() {
+                return file.getOriginalFilename();
+            }
+        });
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> responseID= restTemplate.exchange(
+                "https://asr.api.speechmatics.com/v2/jobs/",
+                HttpMethod.POST,
+                requestEntity,
+                String.class
+        );
+        String responseBody = responseID.getBody();
+//        System.out.println(responseBody);
+        JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
+        String jobid = jsonNode.get("id").asText();
+//        System.out.println("id: "+jobid);
+        HttpHeaders transcriptHeaders = new HttpHeaders();
+        transcriptHeaders.set("X-SM-EAR-Tag", "<string>");
+        transcriptHeaders.set("Authorization", "Bearer UGQ5b3MLYxEE5aue9xZ7OUTMiVR8Athq");
+        transcriptHeaders.set("Accept", "application/json");
+        HttpEntity<String> transcriptRequestEntity = new HttpEntity<>(transcriptHeaders);
+        ResponseEntity<String> jobDetails;
+        String jobStatus="running";
+        while (jobStatus.equals("running")){
+            jobDetails= restTemplate.exchange(
+                    "https://asr.api.speechmatics.com/v2/jobs/"+jobid,
+                    HttpMethod.GET,
+                    transcriptRequestEntity,
+                    String.class
+            );
+            JsonNode jsonNode2 = new ObjectMapper().readTree(jobDetails.getBody());
+            jobStatus = jsonNode2.get("job").get("status").asText();
+//            System.out.println("status: "+jobStatus);
+        }
+//        System.out.println("https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt");
+        ResponseEntity<String> responseText =restTemplate.exchange(
+                "https://asr.api.speechmatics.com/v2/jobs/"+jobid+"/transcript?format=txt",
+                HttpMethod.GET,
+                transcriptRequestEntity,
+                String.class
+        );
+        String text=responseText.getBody();
+//        System.out.println("text: "+text);
+        HttpHeaders wojoodHeaders = new HttpHeaders();
+        wojoodHeaders.set("User-Agent","Mozilla/5.0");
+        wojoodHeaders.set("Content-Type", "application/json");
+        String WojoodBody=String.format("{ \"sentence\": \"%s\", \"mode\": \"1\" }", text);
+        HttpEntity<String> wojoodRequestEntity = new HttpEntity<>(WojoodBody, wojoodHeaders);
+        HttpEntity<String> WojoodText =restTemplate.exchange(
+                "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",
+                HttpMethod.POST,
+                wojoodRequestEntity,
+                String.class
+        );
+        Calls call=new Calls();
+        call.setAudioText(responseText.getBody());
+        System.out.println(call.getAudioText());
+
+        call.setNerTags(WojoodText.getBody());
+        System.out.println(call.getNerTags());
+        callsInterfaceRepository.save(call);
+    }
 
 
 //    @Override

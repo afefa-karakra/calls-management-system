@@ -24,7 +24,7 @@ public class Calls implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "audioText", nullable = false)
+    @Column(name = "audioText", nullable = false, columnDefinition = "TEXT")
     private String audioText;
 
     @Column(name = "date", nullable = true)
@@ -45,13 +45,13 @@ public class Calls implements Serializable {
     @Column(name = "keywords", nullable = true)
     private String keywords;
 
-    @Column(name = "nerTags", nullable = true)
+    @Column(name = "nerTags", nullable = true,columnDefinition = "TEXT")
     private String nerTags;
 
     @Column(name = "entityClasses", nullable = true)
     private String entityClasses;
 
-    @Column(name = "trash")
+    @Column(name = "trash" , nullable = true)
     private boolean trash;
 
 

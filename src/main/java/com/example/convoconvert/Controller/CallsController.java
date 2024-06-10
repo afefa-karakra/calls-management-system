@@ -12,7 +12,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -132,5 +134,14 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));
     }
 
+    @CrossOrigin
+    @PostMapping("/add")
+    public void convertSpeechToText(@RequestParam("file") MultipartFile file) throws IOException {
+//        if (file.isEmpty()) {
+//            return new ResponseEntity<>("Please select a file to upload.", HttpStatus.BAD_REQUEST);
+//        }
+        callsServiceInterface.addCall(file);
+
+    }
 
 }

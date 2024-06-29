@@ -1,9 +1,7 @@
 package com.example.convoconvert.Controller;
 
 import com.example.convoconvert.Service.SpeachToTextService;
-import kong.unirest.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +9,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+@Tag(name = "Speach To Text")
 @RestController
 public class SpeachToTextApi {
+   final private SpeachToTextService speachToTextService;
 
-    @Autowired
-    private SpeachToTextService speachToTextService;
+    public SpeachToTextApi(SpeachToTextService speachToTextService) {
+        this.speachToTextService = speachToTextService;
+    }
 
     @CrossOrigin
     @PostMapping("/transcribe")

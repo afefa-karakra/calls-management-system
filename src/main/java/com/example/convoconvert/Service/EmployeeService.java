@@ -1,12 +1,10 @@
 package com.example.convoconvert.Service;
 
 import com.example.convoconvert.DTO.EmployeeDTO;
-import com.example.convoconvert.Entity.Customer;
 import com.example.convoconvert.Entity.Employee;
 import com.example.convoconvert.Exception.ResourceNotFoundException;
 import com.example.convoconvert.Repository.EmployeeInterfaceRepository;
 import com.example.convoconvert.Service.Interface.EmployeeServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +15,12 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
 
-    @Autowired
     private EmployeeInterfaceRepository employeeInterfaceRepository;
+
+    public EmployeeService(EmployeeInterfaceRepository employeeInterfaceRepository) {
+        this.employeeInterfaceRepository = employeeInterfaceRepository;
+    }
+
     @Override
     public EmployeeDTO getEmployeeById(long id) {
 

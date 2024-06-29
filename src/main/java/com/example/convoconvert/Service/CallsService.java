@@ -1,12 +1,11 @@
 package com.example.convoconvert.Service;
 
 import com.example.convoconvert.DTO.CallsDTO;
-import com.example.convoconvert.DTO.CustomerDTO;
 import com.example.convoconvert.Entity.Calls;
 import com.example.convoconvert.Exception.ResourceNotFoundException;
 import com.example.convoconvert.Repository.CallsInterfaceRepository;
 import com.example.convoconvert.Service.Interface.CallsServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 
@@ -18,9 +17,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class CallsService implements CallsServiceInterface {
-
-    @Autowired
-    private CallsInterfaceRepository callsInterfaceRepository;
+   final private CallsInterfaceRepository callsInterfaceRepository;
+    public CallsService(CallsInterfaceRepository callsInterfaceRepository) {
+        this.callsInterfaceRepository = callsInterfaceRepository;
+    }
 
     @Override
     public CallsDTO getCallById(long id) {
@@ -163,6 +163,7 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setStarted(calls.isStarted());
         callsDTO.setCustomerName(calls.getCustomer().getName());
         callsDTO.setEmployeeName(calls.getEmployee().getName());
+
         return callsDTO;
     }
 

@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerService implements CustomerServiceInterface {
-
-    @Autowired
     private CustomerInterfaceRepository customerInterfaceRepository;
+
+    public CustomerService(CustomerInterfaceRepository customerInterfaceRepository) {
+        this.customerInterfaceRepository = customerInterfaceRepository;
+    }
 
     @Override
     public CustomerDTO getCustomerById(long id) {

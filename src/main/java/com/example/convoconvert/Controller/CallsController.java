@@ -145,14 +145,14 @@ public class CallsController {
         return new ResponseEntity<>(callsServiceInterface.updateCall(callsDTO, id), HttpStatus.OK);
     }
 
-    @CrossOrigin
-    @PatchMapping ("/{id}")
-    public ResponseEntity<CallsDTO> updateFieldsOfCallls
-            (@Valid @RequestBody Map<String , Optional> map
-                    , @PathVariable(name = "id") long id) {
-
-        return new ResponseEntity<>(callsServiceInterface.updateFieldsOfCall(id , map), HttpStatus.OK);
-    }
+//    @CrossOrigin
+//    @PatchMapping ("/{id}")
+//    public ResponseEntity<CallsDTO> updateFieldsOfCallls
+//            (@Valid @RequestBody Map<String , Optional> map
+//                    , @PathVariable(name = "id") long id) {
+//
+//        return new ResponseEntity<>(callsServiceInterface.updateFieldsOfCall(id , map), HttpStatus.OK);
+//    }
 
     @CrossOrigin
     @GetMapping("/started")

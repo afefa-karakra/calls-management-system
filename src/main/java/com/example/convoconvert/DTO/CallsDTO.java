@@ -1,6 +1,5 @@
 package com.example.convoconvert.DTO;
 
-import java.sql.Blob;
 import java.sql.Time;
 import java.util.Date;
 
@@ -8,6 +7,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.w3c.dom.Text;
 
 
 @Data

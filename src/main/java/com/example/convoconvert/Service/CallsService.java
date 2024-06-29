@@ -60,30 +60,30 @@ public class CallsService implements CallsServiceInterface {
     public CallsDTO updateCall(CallsDTO callsDTO, long id) {
         Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
 
-        calls.setAudioText(callsDTO.getAudioText());
+        calls.setAudioText(String.valueOf(callsDTO.getAudioText()));
         calls.setDate(callsDTO.getDate());
 
         Calls updateCalls = callsInterfaceRepository.save(calls);
         return mapToDTO(updateCalls);
     }
 
-    @Override
-    public CallsDTO updateFieldsOfCall(long id, Map<String, Optional> map) {
-
-        Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
-
-        for (Map.Entry<String , Optional> hm : map.entrySet()){
-            String keyFromMap = hm.getKey();
-
-            if(keyFromMap.equals("audioText")){
-                String obj = hm.getValue().toString();
-
-                calls.setAudioText(obj);
-            }
-        }
-        Calls updateCalls = callsInterfaceRepository.save(calls);
-        return mapToDTO(updateCalls);
-    }
+//    @Override
+//    public CallsDTO updateFieldsOfCall(long id, Map<String, Optional> map) {
+//
+//        Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
+//
+//        for (Map.Entry<String , Optional> hm : map.entrySet()){
+//            String keyFromMap = hm.getKey();
+//
+//            if(keyFromMap.equals("audioText")){
+//                String obj = hm.getValue().toString();
+//
+//                calls.setAudioText();
+//            }
+//        }
+//        Calls updateCalls = callsInterfaceRepository.save(calls);
+//        return mapToDTO(updateCalls);
+//    }
 
 
     @Override
@@ -172,6 +172,7 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setEntityClasses(calls.getEntityClasses());
         callsDTO.setNerTags(calls.getNerTags());
         callsDTO.setTrash(calls.isTrash());
+        callsDTO.setTime(calls.getTime());
         callsDTO.setStarted(calls.isStarted());
         callsDTO.setCustomerName(calls.getCustomer().getName());
         callsDTO.setEmployeeName(calls.getEmployee().getName());

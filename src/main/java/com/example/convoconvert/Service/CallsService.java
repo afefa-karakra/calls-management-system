@@ -1,15 +1,17 @@
 package com.example.convoconvert.Service;
 
 import com.example.convoconvert.DTO.CallsDTO;
-import com.example.convoconvert.DTO.CustomerDTO;
 import com.example.convoconvert.Entity.Calls;
+import com.example.convoconvert.Entity.Customer;
 import com.example.convoconvert.Exception.ResourceNotFoundException;
 import com.example.convoconvert.Repository.CallsInterfaceRepository;
+import com.example.convoconvert.Repository.CustomerInterfaceRepository;
 import com.example.convoconvert.Service.Interface.CallsServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +21,14 @@ import java.util.stream.Collectors;
 @Service
 public class CallsService implements CallsServiceInterface {
 
-    @Autowired
+
     private CallsInterfaceRepository callsInterfaceRepository;
+    private CustomerInterfaceRepository customerInterfaceRepository;
+
+    public CallsService(CallsInterfaceRepository callsInterfaceRepository , CustomerInterfaceRepository customerInterfaceRepository) {
+        this.callsInterfaceRepository = callsInterfaceRepository;
+        this.customerInterfaceRepository = customerInterfaceRepository;
+    }
 
     @Override
     public CallsDTO getCallById(long id) {
@@ -140,6 +148,10 @@ public class CallsService implements CallsServiceInterface {
                 .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
     }
 
+    @Override
+    public void addCall(MultipartFile file) throws IOException {
+
+    }
 
 
 //    @Override
@@ -163,6 +175,9 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setStarted(calls.isStarted());
         callsDTO.setCustomerName(calls.getCustomer().getName());
         callsDTO.setEmployeeName(calls.getEmployee().getName());
+        callsDTO.setPhoneNumber(calls.getCustomer().getPhoneNumber());
+        callsDTO.setSecondPhoneNumber(calls.getCustomer().getSecondPhoneNumber());
+
         return callsDTO;
     }
 
@@ -174,9 +189,16 @@ public class CallsService implements CallsServiceInterface {
         calls.setStatus(callsDTO.getStatus());
         calls.setEntityClasses(callsDTO.getEntityClasses());
         calls.setNerTags(callsDTO.getNerTags());
+        calls.setTime(callsDTO.getTime());
         calls.setId(callsDTO.getId());
         calls.setTrash(callsDTO.isTrash());
         calls.setStarted(callsDTO.isStarted());
+
+        if (callsDTO.getCustomerName() != null) {
+            Customer customer = customerInterfaceRepository.findById(callsDTO.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Customer", "id", callsDTO.getId()));
+            calls.setCustomer(customer);
+        }
 
         return calls;
     }

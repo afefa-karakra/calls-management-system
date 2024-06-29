@@ -28,6 +28,10 @@ public class CallsDTO {
     private String employeeName;
     private String customerName;
 
+
+    private int phoneNumber;
+    private int secondPhoneNumber;
+
     public CallsDTO(String keywords) {
         this.keywords = keywords;
     }

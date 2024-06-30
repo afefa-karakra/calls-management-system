@@ -20,6 +20,9 @@ public interface CallsServiceInterface {
 
  //   CallsDTO updateFieldsOfCall (long id , Map<String , Optional>  map);
     List<CallsDTO> getAllCalls();
+
+    CallsDTO updateFieldsOfCall(long id, Map<String, Optional> map);
+
     void deleteCallById (long id);
     List<CallsDTO> getStartedCalls();
     List<CallsDTO> getSolveCalls();

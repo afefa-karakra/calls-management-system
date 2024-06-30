@@ -250,6 +250,9 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setNerTags(calls.getNerTags());
         callsDTO.setTrash(calls.isTrash());
         callsDTO.setStarted(calls.isStarted());
+        callsDTO.setTime(calls.getTime());
+        callsDTO.setPhoneNumber(calls.getCustomer().getPhoneNumber());
+        callsDTO.setSecondPhoneNumber(calls.getCustomer().getSecondPhoneNumber());
         callsDTO.setCustomerName(calls.getCustomer().getName());
         callsDTO.setEmployeeName(calls.getEmployee().getName());
         return callsDTO;
@@ -263,9 +266,12 @@ public class CallsService implements CallsServiceInterface {
         calls.setStatus(callsDTO.getStatus());
         calls.setEntityClasses(callsDTO.getEntityClasses());
         calls.setNerTags(callsDTO.getNerTags());
+        calls.setTime(callsDTO.getTime());
         calls.setId(callsDTO.getId());
         calls.setTrash(callsDTO.isTrash());
         calls.setStarted(callsDTO.isStarted());
+     //   calls.set(callsDTO.isStarted());
+
 
         return calls;
     }

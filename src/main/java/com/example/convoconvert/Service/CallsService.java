@@ -67,7 +67,7 @@ public class CallsService implements CallsServiceInterface {
     public CallsDTO updateCall(CallsDTO callsDTO, long id) {
         Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
 
-        calls.setAudioText(callsDTO.getAudioText());
+        calls.setAudioText(String.valueOf(callsDTO.getAudioText()));
         calls.setDate(callsDTO.getDate());
 
         Calls updateCalls = callsInterfaceRepository.save(calls);
@@ -260,7 +260,7 @@ public class CallsService implements CallsServiceInterface {
 
     private Calls mapToEntity(CallsDTO callsDTO) {
         Calls calls = new Calls();
-        calls.setAudioText(callsDTO.getAudioText());
+        calls.setAudioText(String.valueOf(callsDTO.getAudioText()));
         calls.setDate(callsDTO.getDate());
         calls.setKeywords(callsDTO.getKeywords());
         calls.setStatus(callsDTO.getStatus());

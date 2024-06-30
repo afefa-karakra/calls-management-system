@@ -24,7 +24,8 @@ public class Calls implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "audioText", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "audioText", nullable = false, columnDefinition = "LONGTEXT")
+    @Lob
     private String audioText;
 
     @Column(name = "date", nullable = true)

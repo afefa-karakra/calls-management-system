@@ -18,7 +18,7 @@ public interface CallsServiceInterface {
     CallsDTO createCall (CallsDTO callsDTO);
     CallsDTO updateCall (CallsDTO callsDTO , long id);
 
-    CallsDTO updateFieldsOfCall (long id , Map<String , Optional>  map);
+ //   CallsDTO updateFieldsOfCall (long id , Map<String , Optional>  map);
     List<CallsDTO> getAllCalls();
     void deleteCallById (long id);
     List<CallsDTO> getStartedCalls();

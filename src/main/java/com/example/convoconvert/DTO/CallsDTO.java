@@ -1,16 +1,14 @@
 package com.example.convoconvert.DTO;
 
-import java.sql.Blob;
 import java.sql.Time;
-import java.util.Arrays;
 import java.util.Date;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.w3c.dom.Text;
 
-import javax.management.ConstructorParameters;
 
 @Data
 @NoArgsConstructor
@@ -29,6 +27,10 @@ public class CallsDTO {
     private boolean trash;
     private String employeeName;
     private String customerName;
+
+
+    private int phoneNumber;
+    private int secondPhoneNumber;
 
     public CallsDTO(String keywords) {
         this.keywords = keywords;

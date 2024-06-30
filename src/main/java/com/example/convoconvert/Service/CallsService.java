@@ -213,7 +213,7 @@ public class CallsService implements CallsServiceInterface {
         HttpHeaders wojoodHeaders = new HttpHeaders();
         wojoodHeaders.set("User-Agent","Mozilla/5.0");
         wojoodHeaders.set("Content-Type", "application/json");
-        String WojoodBody=String.format("{ \"sentence\": \"%s\", \"mode\": \"1\" }", text);
+        String WojoodBody=String.format("{ \"sentence\": \"%s\", \"mode\": \"3\" }", text);
         HttpEntity<String> wojoodRequestEntity = new HttpEntity<>(WojoodBody, wojoodHeaders);
         HttpEntity<String> WojoodText =restTemplate.exchange(
                 "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",

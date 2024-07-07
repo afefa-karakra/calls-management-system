@@ -46,7 +46,7 @@ public class Calls implements Serializable {
     @Column(name = "keywords", nullable = true)
     private String keywords;
 
-    @Column(name = "nerTags", nullable = true,columnDefinition = "TEXT")
+    @Column(name = "nerTags", nullable = true, columnDefinition = "LONGTEXT")
     private String nerTags;
 
     @Column(name = "entityClasses", nullable = true)

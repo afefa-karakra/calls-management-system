@@ -92,6 +92,11 @@ public class CustomerService implements CustomerServiceInterface {
         customerInterfaceRepository.delete(customer);
     }
 
+//    @Override
+//    public List<CustomerDTO> getAllCustomerName() {
+//        return null;
+//    }
+
     private Customer mapToEntity (CustomerDTO customerDTO){
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());

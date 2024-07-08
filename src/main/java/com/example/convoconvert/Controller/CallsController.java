@@ -208,15 +208,4 @@ public class CallsController {
     public ResponseEntity<List<CallsDTO>> getDateByCallId(@RequestParam long id){
         return ResponseEntity.ok().body(callsServiceInterface.getDateByCallId( id));
     }
-
-    @CrossOrigin
-    @PostMapping("/add")
-    public void convertSpeechToText(@RequestParam("file") MultipartFile file) throws IOException {
-//        if (file.isEmpty()) {
-//            return new ResponseEntity<>("Please select a file to upload.", HttpStatus.BAD_REQUEST);
-//        }
-        callsServiceInterface.addCall(file);
-
-    }
-
 }

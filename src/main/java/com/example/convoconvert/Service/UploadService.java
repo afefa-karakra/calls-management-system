@@ -1,6 +1,11 @@
 package com.example.convoconvert.Service;
 
 import com.example.convoconvert.Entity.Calls;
+import com.example.convoconvert.Entity.Customer;
+import com.example.convoconvert.Entity.Employee;
+import com.example.convoconvert.Repository.CallsInterfaceRepository;
+import com.example.convoconvert.Repository.CustomerInterfaceRepository;
+import com.example.convoconvert.Repository.EmployeeInterfaceRepository;
 import com.example.convoconvert.Service.Interface.UploadServiceInterface;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.api.gax.longrunning.OperationFuture;
@@ -38,6 +43,15 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class UploadService implements UploadServiceInterface {
+
+    @Autowired
+    private CallsInterfaceRepository callsInterfaceRepository;
+
+    @Autowired
+    private CustomerInterfaceRepository customerInterfaceRepository;
+
+    @Autowired
+    private EmployeeInterfaceRepository employeeInterfaceRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UploadService.class);
 
@@ -90,7 +104,7 @@ public class UploadService implements UploadServiceInterface {
         }
     }
 
-    public ResponseEntity<String> handleFileUpload(MultipartFile file) {
+    public ResponseEntity<String> handleFileUpload(MultipartFile file,String customerName, Integer customerNumber, String employeeName) {
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please select a file to upload.");
         }
@@ -110,6 +124,12 @@ public class UploadService implements UploadServiceInterface {
             call.setAudioText(audioText);
             String nerText=wojood(audioText);
             call.setNerText(nerText);
+            Customer customer= customerInterfaceRepository.findByName(customerName);
+
+            Employee employee= employeeInterfaceRepository.findByName(employeeName);
+            call.setCustomer(customer);
+            call.setEmployee(employee);
+            callsInterfaceRepository.save(call);
             return ResponseEntity.ok("File uploaded successfully: " + targetPath + "\nTranscription: " + audioText);
         } catch (IOException | InterruptedException e) {
             logger.error("Failed to upload file", e);

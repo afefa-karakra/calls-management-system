@@ -35,6 +35,5 @@ public interface CallsServiceInterface {
     List<CallsDTO> getEntityClassesByCallId(long id);
 
     List<CallsDTO> getDateByCallId(long id);
-    void addCall(MultipartFile file) throws IOException;
 
 }

@@ -18,7 +18,7 @@ public class UploadController {
 
 
     @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-       return uploadServiceInterface.handleFileUpload(file);
+    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file,@RequestParam String customerName, @RequestParam Integer customerNumber, @RequestParam String employeeName) {
+       return uploadServiceInterface.handleFileUpload(file,customerName,customerNumber,employeeName);
     }
 }

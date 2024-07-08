@@ -225,8 +225,8 @@ public class CallsService implements CallsServiceInterface {
         call.setAudioText(responseText.getBody());
         System.out.println(call.getAudioText());
 
-        call.setNerTags(WojoodText.getBody());
-        System.out.println(call.getNerTags());
+        call.setNerText(WojoodText.getBody());
+        System.out.println(call.getNerText());
         callsInterfaceRepository.save(call);
     }
 

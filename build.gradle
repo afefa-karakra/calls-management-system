@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.4'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.springframework.boot' version '3.3.1'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'com.example'
@@ -21,8 +21,13 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
+dependencyManagement {
+    imports {
+        mavenBom 'com.google.cloud:libraries-bom:26.42.0'
+    }
+}
 
+dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -37,25 +42,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
     implementation 'org.apache.httpcomponents:httpcore:4.4.13'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-
-
     implementation 'com.konghq:unirest-java:3.14.5'
-    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
-    implementation 'org.apache.httpcomponents:httpcore:4.4.13'
-
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
 
-
-// https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp
-    implementation group: 'com.squareup.okhttp', name: 'okhttp', version: '2.7.5'
-
-
+    implementation 'com.google.cloud:google-cloud-speech'
+    implementation 'com.google.auth:google-auth-library-oauth2-http:1.23.0'
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
-}
-test {
     useJUnitPlatform()
 }

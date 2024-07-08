@@ -9,6 +9,7 @@ import java.util.Date;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.List;
 
 
 @Data
@@ -31,8 +32,8 @@ public class Calls implements Serializable {
     @Column(name = "date", nullable = true)
     private Date date;
 
-    @Column(name = "audio", nullable = true)
-    private byte[] audio;
+    @Column(name = "audio", nullable = false)
+    private String audio;
 
     @Column(name = "time", nullable = true)
     private Time time;
@@ -47,7 +48,10 @@ public class Calls implements Serializable {
     private String keywords;
 
     @Column(name = "nerTags", nullable = true, columnDefinition = "LONGTEXT")
-    private String nerTags;
+    private List<String> nerTags;
+
+    @Column(name = "nerText", nullable = true, columnDefinition = "LONGTEXT")
+    private String nerText;
 
     @Column(name = "entityClasses", nullable = true)
     private String entityClasses;

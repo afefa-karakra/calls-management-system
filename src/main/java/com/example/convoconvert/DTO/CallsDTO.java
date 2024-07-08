@@ -2,6 +2,7 @@ package com.example.convoconvert.DTO;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 
 import lombok.AllArgsConstructor;
@@ -22,7 +23,8 @@ public class CallsDTO {
     private boolean started;
     private String status;
     private String keywords;
-    private String nerTags;
+    private List<String> nerTags;
+    private String nerText;
     private String entityClasses;
     private boolean trash;
     private String employeeName;

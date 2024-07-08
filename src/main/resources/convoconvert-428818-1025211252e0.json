@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "convoconvert-428818",
+  "private_key_id": "1025211252e0d868cbd40f5d82fc46ecec66a06f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCWf5cE/AjpnswA\n3CdpHzQbdFSv9QFNyBHkDAKIgiyajQ6brwwmNVPoVN1bCIwO2bJN2DGtVknE1ZeA\n/QwS6shFM6aRXvbNdUphUGYOyPETbZZK7FzG6jbJ9WaAq8g1YC6c8TUfKepayncF\nVaiLro35a6Kq+0SZ0rw8wjlPWnsadBlEe8YwwMs6eOuWNs/2PveZthMCVLZmS8eG\nBTw7jnY7nx/yueV6J6maReVFqfvq7w1Fy7c1gFw4bDQtEosbB040YXguSIzTDmy6\n435zEBVfmUK6FyBoL6MRyZ5tMiHlTEg4RfwVA250MU8PalR6SIozCTUytHvM4MDU\nmzmahrGTAgMBAAECggEAFt50gwa5Y/wEC+1oSl+6JKHcweV9DpC5semRSPpe721C\nga3BLt0o+Zj2ZKrmfYCJyQJyf2B+p9u9Fetd4Pyu9LUQjpkw76+ZtIfpuj1r71kr\ntAmOtOX08A4g8VR+gSiIbMN1IF3XhXcBTFzj1mCZT668x+E+tLvXwXPSDu403qP3\nYrRdYFCXcsHosi2rLVmQ9pwGZEPcJl+GFK0QFWXzrGmgzr74rdJYHJtgYopRwr0U\nEhSGWPOo8JfpsmgDAs7A22edi98s2sg4s6p3flo4qUVKXKFmrL2JYO3pV/vkD8wM\nfr9JMLi85GRCKRCDxQyjM7zLgKfvoTCTfEShZmeN4QKBgQDIlf53Q1/KY5+F0iMx\nmsRoFwnB4cNOsr9PeALlv6dCM7+gyW7yQT/hc0WeLP1qMqUzTKy3NDPwBd1eFgOC\nMpz83ww/EMiYBdRAyOJmFAnxDXaDRojFM+2xRgkQdYvi9OBXZA4axuywdHM59rvm\n7+EF7evtae9/ySZ2c7j9LbLwnQKBgQDAE0OwoLlEewaezBrQ1dsNxmjNvmF6W60N\nhdtHcUtLALXbAjmWYpvhrg7I6kPIZUUeKvEPfmKMyViWsLQ0MXqBDqVMoYIzIcGJ\nc0+bR9giyqF41GxfkhAWpY3E5VCXaTQzuv9cuqghKWz02AnaJvZMxORELq74+Cv2\nn3eHgx2b7wKBgQCrVQuNfXwV2PCKksrC9SqsqnkIJbn4v8+Pprf63LCWaLNXOJfO\nz5MsFJUzncQ78NSRM/4XYry2WZwTYIRQssDLcg341HIzAE+jorNXc+hmARTo3te2\ncjumf2cAqxb4nif+HZW6o43Kzz0ZFrq7cMxpjydFnIYZRYzYAtLRVzaQNQKBgG3R\n1e8ERkmISeW7b02eKKv8mGmig5txFUXZFeIIPfN5SYEaCZEZemUTnvJzNyQ5+sXf\n6YphSbmTWap3B+GbtJ5boFlrMsVHdJ/BJW/0KPjjgGVUl04hdj9skt1T+7tGdIlr\nTpxXQNANHnXzm9Z2VnbYUGdHhdVmF8Tfsnjxl5lTAoGBAMTGL3ngHe0jTX7wIZl8\nm2jQjIcL99F3bGk9j22D6xCwmj+ghFhvrcQLh2+DTLNFvnDf0MuRQoPni7+raR29\n4ezourtv3UgvJHesbfF0XwFN27JRxsKhVu0ESwdiAXPPdsQMu1pX/ZOnHMTUD9bn\nSWUKBM/m2gCbDJpWYoqEOidb\n-----END PRIVATE KEY-----\n",
+  "client_email": "convoconvert@convoconvert-428818.iam.gserviceaccount.com",
+  "client_id": "101219050738038624118",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/convoconvert%40convoconvert-428818.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

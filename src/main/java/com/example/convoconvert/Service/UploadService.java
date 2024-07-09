@@ -7,6 +7,8 @@ import com.example.convoconvert.Repository.CallsInterfaceRepository;
 import com.example.convoconvert.Repository.CustomerInterfaceRepository;
 import com.example.convoconvert.Repository.EmployeeInterfaceRepository;
 import com.example.convoconvert.Service.Interface.UploadServiceInterface;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.api.gax.longrunning.OperationFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -228,7 +230,14 @@ public class UploadService implements UploadServiceInterface {
                 wojoodRequestEntity,
                 String.class
         );
-        return WojoodText.getBody();
+        try {
+            String responseBody = WojoodText.getBody();
+            JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
+            return jsonNode.get("resp").toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

@@ -70,6 +70,9 @@ public class CallsService implements CallsServiceInterface {
         calls.setAudioText(String.valueOf(callsDTO.getAudioText()));
         calls.setDate(callsDTO.getDate());
 
+        calls.setKeywords(callsDTO.getKeywords());
+        calls.setStatus(callsDTO.getStatus());
+
         Calls updateCalls = callsInterfaceRepository.save(calls);
         return mapToDTO(updateCalls);
     }

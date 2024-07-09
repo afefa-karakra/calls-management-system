@@ -23,7 +23,7 @@ public class CallsDTO {
     private boolean started;
     private String status;
     private String keywords;
-    private String nerTags;
+    private List<String> nerTags;
     private String nerText;
     private String entityClasses;
     private boolean trash;

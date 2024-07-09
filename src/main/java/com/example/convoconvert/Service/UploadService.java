@@ -40,8 +40,12 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UploadService implements UploadServiceInterface {
@@ -126,8 +130,9 @@ public class UploadService implements UploadServiceInterface {
             call.setAudioText(audioText);
             String nerText=wojood(audioText);
             call.setNerText(nerText);
+            List<String> nerTag=getNerTagList(nerText);
+            call.setNerTags(nerTag);
             Customer customer= customerInterfaceRepository.findByName(customerName);
-
             Employee employee= employeeInterfaceRepository.findByName(employeeName);
             call.setCustomer(customer);
             call.setEmployee(employee);
@@ -239,6 +244,15 @@ public class UploadService implements UploadServiceInterface {
             return null;
         }
     }
+    private List<String> getNerTagList(String text) {
+        Pattern pattern = Pattern.compile("(<span.*?>.*?</span>)");
+        Matcher matcher = pattern.matcher(text);
+        List<String> nerTags = new ArrayList<>();
 
+        while (matcher.find()) {
+            nerTags.add(matcher.group(1));
+        }
+        return nerTags;
+    }
 
 }

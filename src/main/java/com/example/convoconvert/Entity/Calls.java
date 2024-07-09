@@ -48,7 +48,8 @@ public class Calls implements Serializable {
     private String keywords;
 
     @Column(name = "nerTags", nullable = true, columnDefinition = "LONGTEXT")
-    private String nerTags;
+    @ElementCollection
+    private List<String> nerTags;
 
     @Column(name = "nerText", nullable = true, columnDefinition = "LONGTEXT")
     private String nerText;

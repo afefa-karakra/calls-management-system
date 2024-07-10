@@ -41,6 +41,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -110,7 +111,7 @@ public class UploadService implements UploadServiceInterface {
         }
     }
 
-    public ResponseEntity<String> handleFileUpload(MultipartFile file,String customerName, Integer customerNumber, String employeeName) {
+    public ResponseEntity<String> handleFileUpload(MultipartFile file, String customerName, Integer customerNumber, String employeeName , String keywords, boolean started , String status,Date date) {
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please select a file to upload.");
         }
@@ -136,6 +137,9 @@ public class UploadService implements UploadServiceInterface {
             Employee employee= employeeInterfaceRepository.findByName(employeeName);
             call.setCustomer(customer);
             call.setEmployee(employee);
+            call.setKeywords(keywords);
+            call.setStarted(started);
+            call.setStatus(status);
             callsInterfaceRepository.save(call);
             return ResponseEntity.ok("File uploaded successfully: " + targetPath + "\nTranscription: " + audioText);
         } catch (IOException | InterruptedException e) {

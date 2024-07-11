@@ -111,7 +111,7 @@ public class UploadService implements UploadServiceInterface {
         }
     }
 
-    public ResponseEntity<String> handleFileUpload(MultipartFile file, String customerName, Integer customerNumber, String employeeName , String keywords, boolean started , String status,Date date) {
+    public ResponseEntity<String> handleFileUpload(MultipartFile file, String customerName, Integer customerNumber, String employeeName , String keywords, boolean started , String status,String date) {
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please select a file to upload.");
         }
@@ -140,6 +140,7 @@ public class UploadService implements UploadServiceInterface {
             call.setKeywords(keywords);
             call.setStarted(started);
             call.setStatus(status);
+            call.setDate(String.valueOf(date));
             callsInterfaceRepository.save(call);
             return ResponseEntity.ok("File uploaded successfully: " + targetPath + "\nTranscription: " + audioText);
         } catch (IOException | InterruptedException e) {

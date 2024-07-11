@@ -30,7 +30,7 @@ public class UploadController {
             @RequestParam String keywords,
             @RequestParam boolean started,
             @RequestParam String status,
-            @RequestParam Date date) {
+            @RequestParam String date) {
         return uploadServiceInterface.handleFileUpload(file, customerName, customerNumber, employeeName, keywords, started, status,date);
     }
 }

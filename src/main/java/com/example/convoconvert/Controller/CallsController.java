@@ -172,19 +172,19 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getNotSolveCalls());
     }
 
-    @CrossOrigin
-    @GetMapping("/fillter")
-    public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id ,@RequestParam("date")Date date){
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-       // return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, (java.sql.Date) date));
-        return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, sqlDate));
-    }
+//    @CrossOrigin
+//    @GetMapping("/fillter")
+//    public ResponseEntity<List<CallsDTO>> getListOfCallsFillter(@RequestParam long id ,@RequestParam("date")Date date){
+//        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+//       // return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, (java.sql.Date) date));
+//        return ResponseEntity.ok().body(callsServiceInterface.getListOfCallsFillter(id, sqlDate));
+//    }
 
-    @GetMapping("filter")
-    public ResponseEntity<List<CallsDTO>> getFilteredCalls(@RequestParam("employeeId") long employeeId, @RequestParam("callDate")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.sql.Date callDate) {
-        List<CallsDTO> callsList = callsServiceInterface.getListOfCallsFillter(employeeId, callDate);
-        return ResponseEntity.ok(callsList);
-    }
+//    @GetMapping("filter")
+//    public ResponseEntity<List<CallsDTO>> getFilteredCalls(@RequestParam("employeeId") long employeeId, @RequestParam("callDate")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) java.sql.Date callDate) {
+//        List<CallsDTO> callsList = callsServiceInterface.getListOfCallsFillter(employeeId, callDate);
+//        return ResponseEntity.ok(callsList);
+//    }
 
 
     @CrossOrigin
@@ -198,11 +198,11 @@ public class CallsController {
         return ResponseEntity.ok().body(callsServiceInterface.getnerTagsByCallId( id));
     }
 
-    @CrossOrigin
-    @GetMapping("/entityClasses")
-    public ResponseEntity<List<CallsDTO>> getEntityClassesByCallId(@RequestParam long id){
-        return ResponseEntity.ok().body(callsServiceInterface.getEntityClassesByCallId( id));
-    }
+//    @CrossOrigin
+//    @GetMapping("/entityClasses")
+//    public ResponseEntity<List<CallsDTO>> getEntityClassesByCallId(@RequestParam long id){
+//        return ResponseEntity.ok().body(callsServiceInterface.getEntityClassesByCallId( id));
+//    }
     @CrossOrigin
     @GetMapping("/date")
     public ResponseEntity<List<CallsDTO>> getDateByCallId(@RequestParam long id){

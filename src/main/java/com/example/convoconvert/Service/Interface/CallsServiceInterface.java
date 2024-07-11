@@ -27,12 +27,12 @@ public interface CallsServiceInterface {
     List<CallsDTO> getStartedCalls();
     List<CallsDTO> getSolveCalls();
     List<CallsDTO> getNotSolveCalls();
-    List<CallsDTO> getListOfCallsFillter(long id , java.sql.Date date);
+  //  List<CallsDTO> getListOfCallsFillter(long id , java.sql.Date date);
 
     List<CallsDTO> getKeywordsByCallId(long id);
 
     List<CallsDTO> getnerTagsByCallId(long id);
-    List<CallsDTO> getEntityClassesByCallId(long id);
+ //   List<CallsDTO> getEntityClassesByCallId(long id);
 
     List<CallsDTO> getDateByCallId(long id);
 

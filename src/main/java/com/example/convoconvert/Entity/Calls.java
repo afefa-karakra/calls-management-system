@@ -30,13 +30,13 @@ public class Calls implements Serializable {
     private String audioText;
 
     @Column(name = "date", nullable = true)
-    private Date date;
+    private String date;
 
     @Column(name = "audio", nullable = false)
     private String audio;
 
-    @Column(name = "time", nullable = true)
-    private Time time;
+//    @Column(name = "time", nullable = true)
+//    private Time time;
 
     @Column(name = "started")
     private boolean started;
@@ -54,11 +54,11 @@ public class Calls implements Serializable {
     @Column(name = "nerText", nullable = true, columnDefinition = "LONGTEXT")
     private String nerText;
 
-    @Column(name = "entityClasses", nullable = true)
-    private String entityClasses;
+//    @Column(name = "entityClasses", nullable = true)
+//    private String entityClasses;
 
-    @Column(name = "trash" , nullable = true)
-    private boolean trash;
+//    @Column(name = "trash" , nullable = true)
+//    private boolean trash;
 
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -18,15 +18,15 @@ public class CallsDTO {
     private long id;
     private String audio;
     private String audioText;
-    private Time time;
-    private Date date;
+ //   private Time time;
+    private String date;
     private boolean started;
     private String status;
     private String keywords;
     private List<String> nerTags;
     private String nerText;
-    private String entityClasses;
-    private boolean trash;
+//    private String entityClasses;
+//    private boolean trash;
     private String employeeName;
     private String customerName;
 

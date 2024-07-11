@@ -122,12 +122,12 @@ public class CallsService implements CallsServiceInterface {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<CallsDTO> getListOfCallsFillter(long id,  Date date) {
-        List<Calls> callsList = callsInterfaceRepository.getListOfCallsFilter(id , date);
-        return callsList.stream().map(calls -> mapToDTO(calls)).collect(Collectors.toList());
-
-    }
+//    @Override
+//    public List<CallsDTO> getListOfCallsFillter(long id,  Date date) {
+//        List<Calls> callsList = callsInterfaceRepository.getListOfCallsFilter(id , date);
+//        return callsList.stream().map(calls -> mapToDTO(calls)).collect(Collectors.toList());
+//
+//    }
 
 
     public List<CallsDTO> getKeywordsByCallId(long id) {
@@ -144,12 +144,12 @@ public class CallsService implements CallsServiceInterface {
                 .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
     }
 
-    @Override
-    public List<CallsDTO> getEntityClassesByCallId(long id) {
-        List<String> entityClasses = callsInterfaceRepository.getEntityClassesByCallId(id);
-        return entityClasses.stream()
-                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
-    }
+//    @Override
+//    public List<CallsDTO> getEntityClassesByCallId(long id) {
+//        List<String> entityClasses = callsInterfaceRepository.getEntityClassesByCallId(id);
+//        return entityClasses.stream()
+//                .map(calls -> new CallsDTO(calls)).collect(Collectors.toList());
+//    }
 
     @Override
     public List<CallsDTO> getDateByCallId(long id) {
@@ -174,11 +174,11 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setDate(calls.getDate());
         callsDTO.setKeywords(calls.getKeywords());
         callsDTO.setStatus(calls.getStatus());
-        callsDTO.setEntityClasses(calls.getEntityClasses());
+     //   callsDTO.setEntityClasses(calls.getEntityClasses());
         callsDTO.setNerTags(calls.getNerTags());
-        callsDTO.setTrash(calls.isTrash());
+    //    callsDTO.setTrash(calls.isTrash());
         callsDTO.setStarted(calls.isStarted());
-        callsDTO.setTime(calls.getTime());
+    //    callsDTO.setTime(calls.getTime());
         callsDTO.setPhoneNumber(calls.getCustomer().getPhoneNumber());
         callsDTO.setSecondPhoneNumber(calls.getCustomer().getSecondPhoneNumber());
         callsDTO.setCustomerName(calls.getCustomer().getName());
@@ -192,11 +192,11 @@ public class CallsService implements CallsServiceInterface {
         calls.setDate(callsDTO.getDate());
         calls.setKeywords(callsDTO.getKeywords());
         calls.setStatus(callsDTO.getStatus());
-        calls.setEntityClasses(callsDTO.getEntityClasses());
+ //       calls.setEntityClasses(callsDTO.getEntityClasses());
         calls.setNerTags(callsDTO.getNerTags());
-        calls.setTime(callsDTO.getTime());
+  //      calls.setTime(callsDTO.getTime());
         calls.setId(callsDTO.getId());
-        calls.setTrash(callsDTO.isTrash());
+ //l       calls.setTrash(callsDTO.isTrash());
         calls.setStarted(callsDTO.isStarted());
      //   calls.set(callsDTO.isStarted());
 

@@ -174,15 +174,13 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setDate(calls.getDate());
         callsDTO.setKeywords(calls.getKeywords());
         callsDTO.setStatus(calls.getStatus());
-     //   callsDTO.setEntityClasses(calls.getEntityClasses());
         callsDTO.setNerTags(calls.getNerTags());
-    //    callsDTO.setTrash(calls.isTrash());
         callsDTO.setStarted(calls.isStarted());
-    //    callsDTO.setTime(calls.getTime());
         callsDTO.setPhoneNumber(calls.getCustomer().getPhoneNumber());
         callsDTO.setSecondPhoneNumber(calls.getCustomer().getSecondPhoneNumber());
         callsDTO.setCustomerName(calls.getCustomer().getName());
         callsDTO.setEmployeeName(calls.getEmployee().getName());
+        callsDTO.setNerText(calls.getNerText());
         return callsDTO;
     }
 
@@ -192,13 +190,10 @@ public class CallsService implements CallsServiceInterface {
         calls.setDate(callsDTO.getDate());
         calls.setKeywords(callsDTO.getKeywords());
         calls.setStatus(callsDTO.getStatus());
- //       calls.setEntityClasses(callsDTO.getEntityClasses());
         calls.setNerTags(callsDTO.getNerTags());
-  //      calls.setTime(callsDTO.getTime());
+        calls.setNerText(callsDTO.getNerText());
         calls.setId(callsDTO.getId());
- //l       calls.setTrash(callsDTO.isTrash());
         calls.setStarted(callsDTO.isStarted());
-     //   calls.set(callsDTO.isStarted());
 
 
         return calls;

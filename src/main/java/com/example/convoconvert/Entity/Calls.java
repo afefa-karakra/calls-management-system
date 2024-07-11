@@ -29,7 +29,7 @@ public class Calls implements Serializable {
     @Lob
     private String audioText;
 
-    @Column(name = "date", nullable = true)
+    @Column(name = "date" ,nullable = false)
     private String date;
 
     @Column(name = "audio", nullable = false)

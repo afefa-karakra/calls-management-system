@@ -67,8 +67,8 @@ public class CallsService implements CallsServiceInterface {
     public CallsDTO updateCall(CallsDTO callsDTO, long id) {
         Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
 
-        calls.setAudioText(String.valueOf(callsDTO.getAudioText()));
-        calls.setDate(callsDTO.getDate());
+//        calls.setAudioText(String.valueOf(callsDTO.getAudioText()));
+//        calls.setDate(callsDTO.getDate());
 
         calls.setKeywords(callsDTO.getKeywords());
         calls.setStatus(callsDTO.getStatus());

@@ -7,6 +7,7 @@ import com.example.convoconvert.Repository.CallsInterfaceRepository;
 import com.example.convoconvert.Repository.CustomerInterfaceRepository;
 import com.example.convoconvert.Repository.EmployeeInterfaceRepository;
 import com.example.convoconvert.Service.Interface.UploadServiceInterface;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.gax.core.FixedCredentialsProvider;
@@ -39,7 +40,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -128,8 +128,10 @@ public class UploadService implements UploadServiceInterface {
             String audioText = transcribeAudio(targetPath);
             call.setAudioText(audioText);
             String nerText=wojood(audioText);
+            nerText = nerText.replaceAll("\\\\\"", "\"");
             call.setNerText(nerText);
-            List<String> nerTag=getNerTagList(nerText);
+            String copyNerText=new String(nerText);
+            List<String> nerTag=getNerTagList(copyNerText);
             call.setNerTags(nerTag);
             Customer customer= customerInterfaceRepository.findByName(customerName);
             Employee employee= employeeInterfaceRepository.findByName(employeeName);
@@ -226,51 +228,34 @@ public class UploadService implements UploadServiceInterface {
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("File too large!");
     }
 
-    private String wojood(String text) {
+    private String wojood(String text) throws JsonProcessingException {
         HttpHeaders wojoodHeaders = new HttpHeaders();
-        wojoodHeaders.set("User-Agent", "Mozilla/5.0");
+        wojoodHeaders.set("User-Agent","Mozilla/5.0");
         wojoodHeaders.set("Content-Type", "application/json");
-        String WojoodBody = String.format("{ \"sentence\": \"%s\", \"mode\": \"3\" }", text);
+        String WojoodBody=String.format("{ \"sentence\": \"%s\", \"mode\": \"3\" }", text);
         HttpEntity<String> wojoodRequestEntity = new HttpEntity<>(WojoodBody, wojoodHeaders);
-        try {
-            ResponseEntity<String> responseEntity = restTemplate.exchange(
-                    "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",
-                    HttpMethod.POST,
-                    wojoodRequestEntity,
-                    String.class
-            );
-            String responseBody = responseEntity.getBody();
-            System.out.println("Response Body: " + responseBody);
-            if (responseBody != null) {
-                JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
-                JsonNode respNode = jsonNode.get("resp");
-                if (respNode != null && respNode.isArray()) {
-                    StringBuilder respText = new StringBuilder();
-                    Iterator<JsonNode> elements = respNode.elements();
-                    while (elements.hasNext()) {
-                        JsonNode element = elements.next();
-                        respText.append(element.asText());
-                        if (elements.hasNext()) {
-                            respText.append(" ");
-                        }
-                    }
-                    return respText.toString();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return WojoodBody;
+        ResponseEntity<String> wojoodResponse= restTemplate.exchange(
+                "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",
+                HttpMethod.POST,
+                wojoodRequestEntity,
+                String.class
+        );
+        String wojoodText= wojoodResponse.getBody();
+        JsonNode jsonNode = new ObjectMapper().readTree(wojoodText);
+        return jsonNode.get("resp").toString();
     }
     private List<String> getNerTagList(String text) {
-        Pattern pattern = Pattern.compile("(<span.*?>.*?</span>)");
-        Matcher matcher = pattern.matcher(text);
         List<String> nerTags = new ArrayList<>();
-
+        text = text.replaceAll("\\\\\"", "\"");
+        Pattern pattern = Pattern.compile("<span\\s+.*?>(.*?)</span>");
+        Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
-            nerTags.add(matcher.group(1));
+            nerTags.add(matcher.group(0));
         }
+
         return nerTags;
     }
+
+
 
 }

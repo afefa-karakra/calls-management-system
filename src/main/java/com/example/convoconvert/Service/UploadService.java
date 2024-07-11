@@ -23,8 +23,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,7 +39,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -234,20 +232,35 @@ public class UploadService implements UploadServiceInterface {
         wojoodHeaders.set("Content-Type", "application/json");
         String WojoodBody = String.format("{ \"sentence\": \"%s\", \"mode\": \"3\" }", text);
         HttpEntity<String> wojoodRequestEntity = new HttpEntity<>(WojoodBody, wojoodHeaders);
-        HttpEntity<String> WojoodText = restTemplate.exchange(
-                "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",
-                HttpMethod.POST,
-                wojoodRequestEntity,
-                String.class
-        );
         try {
-            String responseBody = WojoodText.getBody();
-            JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
-            return jsonNode.get("resp").toString();
+            ResponseEntity<String> responseEntity = restTemplate.exchange(
+                    "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",
+                    HttpMethod.POST,
+                    wojoodRequestEntity,
+                    String.class
+            );
+            String responseBody = responseEntity.getBody();
+            System.out.println("Response Body: " + responseBody);
+            if (responseBody != null) {
+                JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
+                JsonNode respNode = jsonNode.get("resp");
+                if (respNode != null && respNode.isArray()) {
+                    StringBuilder respText = new StringBuilder();
+                    Iterator<JsonNode> elements = respNode.elements();
+                    while (elements.hasNext()) {
+                        JsonNode element = elements.next();
+                        respText.append(element.asText());
+                        if (elements.hasNext()) {
+                            respText.append(" ");
+                        }
+                    }
+                    return respText.toString();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
+        return WojoodBody;
     }
     private List<String> getNerTagList(String text) {
         Pattern pattern = Pattern.compile("(<span.*?>.*?</span>)");

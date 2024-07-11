@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CustomerInterfaceRepository extends JpaRepository<Customer, Long> {
     @Query("SELECT c FROM Customer c WHERE c.name = :name")
@@ -14,4 +16,7 @@ public interface CustomerInterfaceRepository extends JpaRepository<Customer, Lon
 
     @Query("SELECT c FROM Customer c WHERE c.phoneNumber = :phoneNumber")
     Customer findByPhoneNumber(@Param("phoneNumber") Integer phoneNumber);
+
+    @Query("SELECT c.name FROM Customer c")
+    List<String> findAllCustomerNames();
 }

@@ -39,6 +39,7 @@ public class CustomerService implements CustomerServiceInterface {
         return customers.stream().map(customer -> mapToDTO(customer))
                 .collect(Collectors.toList());
     }
+
     @Override
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
         // convert DTO to entity
@@ -90,6 +91,11 @@ public class CustomerService implements CustomerServiceInterface {
 
         Customer customer = customerInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer", "id", id));
         customerInterfaceRepository.delete(customer);
+    }
+
+    @Override
+    public List<String> getAllCustomerNames() {
+        return customerInterfaceRepository.findAllCustomerNames();
     }
 
 //    @Override

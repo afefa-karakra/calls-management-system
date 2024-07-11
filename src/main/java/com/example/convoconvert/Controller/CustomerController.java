@@ -167,5 +167,10 @@ public class CustomerController {
         customerServiceInterface.deleteCustomerById(id);
         return new ResponseEntity<>("Deleted Customer was successful!", HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/names")
+    public List<String> getAllCustomerNames() {
+        return customerServiceInterface.getAllCustomerNames();
+    }
 }
 

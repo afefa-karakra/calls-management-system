@@ -14,5 +14,6 @@ public interface EmployeeServiceInterface {
     EmployeeDTO updateFieldsOfEmployee (long id , Map<String , Optional> map);
     List<EmployeeDTO> getAllEmployee();
     void deleteEmployeeById (long id);
+    List<String> getAllEmployeeNames();
 
 }

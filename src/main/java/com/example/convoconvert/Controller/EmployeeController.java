@@ -173,5 +173,9 @@ public class EmployeeController {
         return new ResponseEntity<>("Deleted successfully!", HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/names")
+    public List<String> getAllEmployeeNames() {
+        return employeeServiceInterface.getAllEmployeeNames();
+    }
 
 }

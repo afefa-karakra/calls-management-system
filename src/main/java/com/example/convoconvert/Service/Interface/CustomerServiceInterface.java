@@ -17,7 +17,7 @@ public interface CustomerServiceInterface {
     CustomerDTO updateFieldsOfCustomer (long id , Map<String , Optional> map);
     List<CustomerDTO> getAllCustomer();
     void deleteCustomerById (long id);
-
+    List<String> getAllCustomerNames();
   //  List<CustomerDTO> getAllCustomerName();
 
 

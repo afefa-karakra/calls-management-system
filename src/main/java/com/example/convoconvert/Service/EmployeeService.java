@@ -89,6 +89,11 @@ public class EmployeeService implements EmployeeServiceInterface {
 
     }
 
+    @Override
+    public List<String> getAllEmployeeNames() {
+        return employeeInterfaceRepository.getAllEmployeeNames();
+    }
+
     private Employee mapToEntity (EmployeeDTO employeeDTO){
         Employee employee = new Employee();
         employee.setName(employeeDTO.getName());

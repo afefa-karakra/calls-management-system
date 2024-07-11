@@ -175,6 +175,7 @@ public class CallsService implements CallsServiceInterface {
         callsDTO.setKeywords(calls.getKeywords());
         callsDTO.setStatus(calls.getStatus());
         callsDTO.setNerTags(calls.getNerTags());
+        callsDTO.setAudio(calls.getAudio());
         callsDTO.setStarted(calls.isStarted());
         callsDTO.setPhoneNumber(calls.getCustomer().getPhoneNumber());
         callsDTO.setSecondPhoneNumber(calls.getCustomer().getSecondPhoneNumber());
@@ -192,6 +193,7 @@ public class CallsService implements CallsServiceInterface {
         calls.setStatus(callsDTO.getStatus());
         calls.setNerTags(callsDTO.getNerTags());
         calls.setNerText(callsDTO.getNerText());
+        calls.setAudio(callsDTO.getAudio());
         calls.setId(callsDTO.getId());
         calls.setStarted(callsDTO.isStarted());
 

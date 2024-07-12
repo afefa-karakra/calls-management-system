@@ -36,4 +36,7 @@ public interface CallsServiceInterface {
 
     List<CallsDTO> getDateByCallId(long id);
 
+    public CallsDTO updateCallForStatus(CallsDTO callsDTO, long id);
+    public CallsDTO updateCallForStarted(CallsDTO callsDTO, long id);
+
 }

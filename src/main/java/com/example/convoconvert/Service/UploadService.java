@@ -247,9 +247,10 @@ public class UploadService implements UploadServiceInterface {
                 wojoodRequestEntity,
                 String.class
         );
-        String wojoodText= wojoodResponse.getBody();
-        JsonNode jsonNode = new ObjectMapper().readTree(wojoodText);
-        return jsonNode.get("resp").toString();
+//        String wojoodText= wojoodResponse.getBody();
+//        JsonNode jsonNode = new ObjectMapper().readTree(wojoodText);
+//        return jsonNode.get("resp").toString();
+        return wojoodResponse.getBody();
     }
     private List<String> getNerTagList(String text) {
         List<String> nerTags = new ArrayList<>();

@@ -91,7 +91,7 @@ public class EmployeeService implements EmployeeServiceInterface {
 
     @Override
     public List<String> getAllEmployeeNames() {
-        return employeeInterfaceRepository.getAllEmployeeNames();
+        return employeeInterfaceRepository.findAllEmployeeNames();
     }
 
     private Employee mapToEntity (EmployeeDTO employeeDTO){

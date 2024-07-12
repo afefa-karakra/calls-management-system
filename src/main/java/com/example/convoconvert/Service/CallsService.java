@@ -79,6 +79,26 @@ public class CallsService implements CallsServiceInterface {
     }
 
     @Override
+    public CallsDTO updateCallForStatus(CallsDTO callsDTO, long id) {
+        Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
+
+        calls.setStatus(callsDTO.getStatus());
+
+        Calls updateCalls = callsInterfaceRepository.save(calls);
+        return mapToDTO(updateCalls);
+    }
+
+    @Override
+    public CallsDTO updateCallForStarted(CallsDTO callsDTO, long id) {
+        Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));
+
+        calls.setStarted(callsDTO.isStarted());
+
+        Calls updateCalls = callsInterfaceRepository.save(calls);
+        return mapToDTO(updateCalls);
+    }
+
+    @Override
     public CallsDTO updateFieldsOfCall(long id, Map<String, Optional> map) {
 
         Calls calls = callsInterfaceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calls", "id", id));

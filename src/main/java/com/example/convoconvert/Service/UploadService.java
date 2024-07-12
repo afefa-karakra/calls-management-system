@@ -235,22 +235,26 @@ public class UploadService implements UploadServiceInterface {
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("File too large!");
     }
 
-    private String wojood(String text) throws JsonProcessingException {
+    private String wojood(String text) {
         HttpHeaders wojoodHeaders = new HttpHeaders();
-        wojoodHeaders.set("User-Agent","Mozilla/5.0");
+        wojoodHeaders.set("User-Agent", "Mozilla/5.0");
         wojoodHeaders.set("Content-Type", "application/json");
-        String WojoodBody=String.format("{ \"sentence\": \"%s\", \"mode\": \"3\" }", text);
+        String WojoodBody = String.format("{ \"sentence\": \"%s\", \"mode\": \"3\" }", text);
         HttpEntity<String> wojoodRequestEntity = new HttpEntity<>(WojoodBody, wojoodHeaders);
-        ResponseEntity<String> wojoodResponse= restTemplate.exchange(
+        HttpEntity<String> WojoodText = restTemplate.exchange(
                 "https://ontology.birzeit.edu/sina/v2/api/wojood/?apikey=BZUstudents",
                 HttpMethod.POST,
                 wojoodRequestEntity,
                 String.class
         );
-//        String wojoodText= wojoodResponse.getBody();
-//        JsonNode jsonNode = new ObjectMapper().readTree(wojoodText);
-//        return jsonNode.get("resp").toString();
-        return wojoodResponse.getBody();
+        try {
+            String responseBody = WojoodText.getBody();
+            JsonNode jsonNode = new ObjectMapper().readTree(responseBody);
+            return jsonNode.get("resp").toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     private List<String> getNerTagList(String text) {
         List<String> nerTags = new ArrayList<>();

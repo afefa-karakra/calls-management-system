@@ -71,8 +71,8 @@ public class CallsService implements CallsServiceInterface {
 //        calls.setDate(callsDTO.getDate());
 
         calls.setKeywords(callsDTO.getKeywords());
-        calls.setStatus(callsDTO.getStatus());
-        calls.setStarted(callsDTO.isStarted());
+//        calls.setStatus(callsDTO.getStatus());
+//        calls.setStarted(callsDTO.isStarted());
 
         Calls updateCalls = callsInterfaceRepository.save(calls);
         return mapToDTO(updateCalls);

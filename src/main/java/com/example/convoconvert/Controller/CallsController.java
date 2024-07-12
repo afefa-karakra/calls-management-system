@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +109,7 @@ public class CallsController {
                     )
             }
     )
-    public ResponseEntity<CallsDTO> createCalls (@Valid @RequestBody CallsDTO callsDTO) {
+    public ResponseEntity<CallsDTO> createCalls (@Valid @RequestBody CallsDTO callsDTO) throws ParseException {
 
         if (callsDTO.getAudioText() ==null) {
             log.error("Cannot have an AudioText {}", callsDTO);

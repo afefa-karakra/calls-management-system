@@ -30,7 +30,7 @@ public class Calls implements Serializable {
     private String audioText;
 
     @Column(name = "date" ,nullable = false)
-    private String date;
+    private Date date;
 
     @Column(name = "audio", nullable = false)
     private String audio;

@@ -19,7 +19,7 @@ public class CallsDTO {
     private String audio;
     private String audioText;
  //   private Time time;
-    private String date;
+    private Date date;
     private boolean started;
     private String status;
     private String keywords;
